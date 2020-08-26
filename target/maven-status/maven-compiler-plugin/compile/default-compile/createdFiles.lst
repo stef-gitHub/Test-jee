@@ -1,12 +1,12 @@
 beans\Eleve.class
 beans\Presence.class
-beans\Bouquin.class
-beans\Personne.class
-beans\Materiel.class
-beans\Emprunt.class
 beans\Prof.class
+beans\Bouquin.class
 servlets\PersonneServlet.class
+beans\Personne.class
 beans\Cours.class
 beans\Ecole.class
 beans\Classe.class
+beans\Materiel.class
+beans\Emprunt.class
 beans\Note.class
