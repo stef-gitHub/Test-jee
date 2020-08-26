@@ -3,7 +3,6 @@ package beans;
 public class Personne {
 
     private int id_personne;
-    private int id_ecole_personne;
     private String nom;
     private String prenom;
     private String adresse;
@@ -14,14 +13,6 @@ public class Personne {
 
     public void setId_personne(int id_personne) {
         this.id_personne = id_personne;
-    }
-
-    public int getId_ecole_personne() {
-        return id_ecole_personne;
-    }
-
-    public void setId_ecole_personne(int id_ecole_personne) {
-        this.id_ecole_personne = id_ecole_personne;
     }
 
     public String getNom() {
@@ -47,4 +38,5 @@ public class Personne {
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
+
 }
