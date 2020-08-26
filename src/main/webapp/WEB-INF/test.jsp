@@ -8,9 +8,37 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <style type="text/css">
+        <%@include file="../assets/css/bootstrap.min.css" %>
+        <%@include file="../assets/css/style.css" %>
+    </style>
+    <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="../assets/javascript/bootstrap.min.js"></script>
     <title>Title</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Logo</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Professeurs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Elèves</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Classes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Emprunts</a>
+        </li>
+    </ul>
+</nav>
 <p>Ceci est une page générée depuis une JSP.</p>
 <p>
     <%
