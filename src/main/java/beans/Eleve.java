@@ -2,12 +2,15 @@ package beans;
 
 import java.util.ArrayList;
 
-public class Eleve {
+public class Eleve extends Personne{
     private String pere;
     private String mere;
     private String contact;
     private ArrayList<Note> listNotes;
     private Classe classe;
+
+    public Eleve() {
+    }
 
     public Eleve(String pere, String mere, String contact, Classe classe) {
         super();

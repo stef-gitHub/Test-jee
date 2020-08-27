@@ -1,6 +1,8 @@
 package dao;
 
+import beans.Eleve;
 import beans.Personne;
+import beans.Professeur;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,7 +15,7 @@ public class EleveDAO {
     static Connection conn;
 
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
-        FileInputStream fis = new FileInputStream("C:/Users/Meunier/IdeaProjects/projet_ecole/src/main/resources/config.properties");
+        FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
         p.load(fis);
         String dname = (String) p.get("Dname");
@@ -88,31 +90,34 @@ public class EleveDAO {
 
     public static ArrayList<Personne> displayEleve() throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
-        ArrayList<Personne> listPersonnes = new ArrayList<>();
-        String query = "SELECT * FROM personne inner join eleve on personne.id_personne = eleve.id_personne";
+        ArrayList<Personne> listEleves = new ArrayList<>();
+        String query = "SELECT personne.nom, personne.prenom, eleve.nom_pere, eleve.nom_mere FROM personne inner join eleve on personne.id_personne = eleve.id_personne";
+
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
 
 
         while (rs.next())
         {
-            Personne personne = new Personne();
-            int id = rs.getInt("id_personne");
-            String nom = rs.getString("nom");
-            String prenom = rs.getString("prenom");
+            Eleve eleve = new Eleve();
 
-            personne.setId_personne(id);
-            personne.setNom(nom);
-            personne.setPrenom(prenom);
+            String nom = rs.getString("personne.nom");
+            String prenom = rs.getString("personne.prenom");
+            String nom_pere = rs.getString("eleve.nom_pere");
+            String nom_mere = rs.getString("eleve.nom_mere");
 
-            listPersonnes.add(personne);
+            eleve.setNom(nom);
+            eleve.setPrenom(prenom);
+            eleve.setPere(nom_pere);
+            eleve.setMere(nom_mere);
+
+            listEleves.add(eleve);
 
             // print the result
-            System.out.format("%s, %s, %s\n", id, nom, prenom);
+            System.out.format("%s, %s, %s, %s\n", nom, prenom, nom_pere, nom_mere);
         }
 
-
-        return listPersonnes;
+        return listEleves;
 
     }
 }
