@@ -2,14 +2,52 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
   <display-name>Archetype Created Web Application</display-name>
+
+
   <servlet>
-    <servlet-name>Test</servlet-name>
-    <servlet-class>servlets.Test</servlet-class>
+    <servlet-name>AccueilServlet</servlet-name>
+    <servlet-class>servlets.AccueilServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ClasseServlet</servlet-name>
+    <servlet-class>servlets.ClasseServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>EleveServlet</servlet-name>
+    <servlet-class>servlets.EleveServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ProfesseurServlet</servlet-name>
+    <servlet-class>servlets.ProfesseurServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>EmpruntServlet</servlet-name>
+    <servlet-class>servlets.EmpruntServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
-    <servlet-name>Test</servlet-name>
-    <url-pattern>/toto</url-pattern>
+    <servlet-name>AccueilServlet</servlet-name>
+    <url-pattern>/accueil</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ClasseServlet</servlet-name>
+    <url-pattern>/classe</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EleveServlet</servlet-name>
+    <url-pattern>/eleve</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProfesseurServlet</servlet-name>
+    <url-pattern>/professeur</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EmpruntServlet</servlet-name>
+    <url-pattern>/emprunt</url-pattern>
   </servlet-mapping>
 </web-app>

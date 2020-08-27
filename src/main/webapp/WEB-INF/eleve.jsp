@@ -1,4 +1,7 @@
-<%--
+<%@ page import="beans.Personne" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%--
   Created by IntelliJ IDEA.
   User: stef4
   Date: 26/08/2020
@@ -86,15 +89,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>John</td>
+                <%
+                    List<Personne> list = (ArrayList<Personne>)request.getAttribute("eleves");
+
+                %>
+                <tr <c:forEach var="${list}" begin="1" end="10">
+                    >
+                    <td>${list.nom}</td>
                     <td>Doe</td>
                     <td>john@example.com</td>
                     <td>
                         <button type="button" class="btn btn-warning">Modifier</button>
                         <button type="button" class="btn btn-danger">Supprimer</button>
                     </td>
-                </tr>
+                </tr </c:forEach>>
                 <tr>
                     <td>Mary</td>
                     <td>Moe</td>
