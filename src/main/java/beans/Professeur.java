@@ -17,6 +17,10 @@ public class Professeur extends Personne{
         this.listEmprunts = listEmprunts;
     }
 
+    public Professeur() {
+
+    }
+
     public String getAdresse_mail() {
         return adresse_mail;
     }
