@@ -28,7 +28,7 @@ public class ClasseServlet extends HttpServlet {
 
         Classe classe = new Classe();
         classe.setAnnee(Integer.parseInt(request.getParameter("annee")));
-        classe.setId_niveau(Integer.parseInt(request.getParameter("niveau")));
+        //classe.setId_niveau(Integer.parseInt(request.getParameter("niveau")));
         classe.setNom(request.getParameter("nom"));
 
         ClasseDAO classeDAO = new ClasseDAO();

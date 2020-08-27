@@ -43,11 +43,6 @@
 </nav>
 <br>
 <h1 class="display-3" style="text-align: center" >
-
-    <c:forEach var="i" begin="0" end="10" step="2">
-        <p>Un message n°<c:out value="${i}" /> !</p>
-    </c:forEach>
-
 </h1>
 <hr>
 <div style ="background-color: white;margin-top: 50px; max-width: 80%" class="container">
@@ -88,40 +83,28 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
+                    <th>Nom</th>
+                    <th>Année</th>
+                    <th>Niveau</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr>
+                <%
+                    List<Classe> list = (ArrayList<Classe>)request.getAttribute("classes");
+                    for (Classe classe : list) {
+                %>
                 <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
+                    <td> <% out.println(classe.getNom());%></td>
+                    <td> <% out.println(classe.getAnnee());%></td>
+                    <td><% out.println(classe.getNiveau().getLibelle());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
+                        <button type="button" class="btn btn-warning" onclick="modifierClasse('<% out.println(classe.getId_classe());%>')">Modifier</button>
+                        <button type="button" class="btn btn-danger" onclick="supprimerClasse('<% out.println(classe.getId_classe());%>')">Supprimer</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr>
+                <% } %>
                 </tbody>
             </table>
         </div>

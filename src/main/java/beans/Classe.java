@@ -5,14 +5,14 @@ public class Classe {
     private Ecole ecole;
     private String nom;
     private int annee;
-    private int id_niveau;
+    private Niveau niveau;
 
-    public int getId_niveau() {
-        return id_niveau;
+    public Niveau getNiveau() {
+        return niveau;
     }
 
-    public void setId_niveau(int id_niveau) {
-        this.id_niveau = id_niveau;
+    public void setNiveau(Niveau niveau) {
+        this.niveau = niveau;
     }
 
     public Classe() {

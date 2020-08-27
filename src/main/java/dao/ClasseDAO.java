@@ -1,6 +1,7 @@
 package dao;
 
 import beans.Classe;
+import beans.Niveau;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class ClasseDAO {
             preparedStatement = conn.prepareStatement("INSERT INTO classe(nom, annee, niveau) VALUES(?, ?, ?);");
             preparedStatement.setString(1, classe.getNom());
             preparedStatement.setInt(2, classe.getAnnee());
-            preparedStatement.setInt(3, classe.getId_niveau());
+            preparedStatement.setInt(3, classe.getNiveau().getId_niveau());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -53,18 +54,30 @@ public class ClasseDAO {
         ArrayList<Classe> classes = new ArrayList<>();
 
         try {
-            String query = "SELECT * FROM classe";
+            String query = "SELECT *, niveau.libelle FROM classe, niveau where classe.id_niveau = niveau.id_niveau";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next())
             {
                 Classe classe = new Classe();
+                Niveau niveau = new Niveau();
+
+                int id_classe = rs.getInt("classe.id_classe");
                 String nom = rs.getString("classe.nom");
+                int annee = rs.getInt("classe.annee");
+                int id_niveau = rs.getInt("classe.id_niveau");
+                String libelle = rs.getString("niveau.libelle");
+
+                niveau.setId_niveau(id_niveau);
+                niveau.setLibelle(libelle);
 
                 System.out.println(nom);
 
                 classe.setNom(nom);
+                classe.setAnnee(annee);
+                classe.setNiveau(niveau);
+                classe.setId_classe(id_classe);
                 classes.add(classe);
             }
             System.out.println(classes);
@@ -76,6 +89,18 @@ public class ClasseDAO {
         return classes;
     }
 
-    public void supprimerClasse(){
+    public void supprimerClasse(int id_classe) throws SQLException, IOException, ClassNotFoundException {
+        PreparedStatement preparedStatement = null;
+        connexionDB();
+
+        try {
+            // connexion = daoFactory.getConnection();
+            preparedStatement = conn.prepareStatement("DELETE FROM classe where id_classe=?;");
+            preparedStatement.setInt(1, id_classe);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        conn.close();
     }
 }
