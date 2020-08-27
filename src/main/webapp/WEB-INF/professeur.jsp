@@ -1,4 +1,6 @@
-<%--
+<%@ page import="beans.Professeur" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: stef4
   Date: 26/08/2020
@@ -47,12 +49,12 @@
         <div class="col-md-12">
             <br>
             <div class="float-right"> <!-- Button to Open the Modal -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createProfesseur">
                     Créer un professeur
                 </button>
 
                 <!-- The Modal CREATE -->
-                <div class="modal fade" id="myModal">
+                <div class="modal fade" id="createProfesseur">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -115,33 +117,22 @@
                 </tr>
                 </thead>
                 <tbody>
+                        <%
+                    List<Professeur> list = (ArrayList<Professeur>)request.getAttribute("professeurs");
+                    for (Professeur professeur : list) {
+                %>
                 <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
+
+                    <td> <% out.println(professeur.getNom());%></td>
+                    <td> <% out.println(professeur.getPrenom());%></td>
+                    <td> <% out.println(professeur.getAdresse_mail());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal">Modifier</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Supprimer</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateProfesseur">Modifier</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteProfesseur">Supprimer</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr>
+                <% } %>
+
                 </tbody>
             </table>
         </div>
@@ -151,7 +142,7 @@
     </div>
 
     <!-- The Modal UPDATE -->
-    <div class="modal fade" id="updateModal">
+    <div class="modal fade" id="updateProfesseur">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -204,7 +195,7 @@
     </div>
 
     <!-- The Modal DELETE -->
-    <div class="modal fade" id="deleteModal">
+    <div class="modal fade" id="deleteProfesseur">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -216,41 +207,13 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="nomProfesseur">Nom</label>
-                            <input type="text" class="form-control" id="nomProfesseur" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="prenomProfesseur">Prénom</label>
-                            <input type="text" class="form-control" id="prenomProfesseur" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="adresseProfesseur">Adresse</label>
-                            <input type="text" class="form-control" id="adresseProfesseur" required>
-                        </div>
-
-                        <div class="form-group row" style="margin-left:1px">
-                            <div class="col-xs-2">
-                                <label for="cpProfesseur">Code Postal</label>
-                                <input type="text" class="form-control" id="cpProfesseur" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="villeProfesseur">Ville</label>
-                            <input type="text" class="form-control" id="villeProfesseur" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="mailProfesseur">Adresse mail</label>
-                            <input type="text" class="form-control" id="mailProfesseur">
-                        </div>
-                    </form>
+                    <p>Etes-vous sûr de vouloir supprimer ce professeur ? </p>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Modifier</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Supprimer</button>
                 </div>
             </div>
         </div>
