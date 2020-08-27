@@ -1,6 +1,8 @@
 package servlets;
 
+import connexion.test;
 import beans.Personne;
+import beans.Classe;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AccueilServlet extends HttpServlet {
+
+     // ConnexionDB.connexionTest();
+
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         /* Création et initialisation du message. */
         String paramAuteur = request.getParameter( "auteur" );

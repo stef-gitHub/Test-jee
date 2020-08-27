@@ -42,10 +42,7 @@
     </ul>
 </nav>
 <br>
-<h1 class="display-3" style="text-align: center" >Gestion des élèves
-    <c:forEach var="entry" begin="1" end="10">
-    ${entry},
-</c:forEach></h1>
+<h1 class="display-3" style="text-align: center" >Gestion des élèves</h1>
 <hr>
 <div style ="background-color: white;margin-top: 50px; max-width: 80%" class="container">
     <div class="row">
@@ -94,20 +91,18 @@
                 <tbody>
                 <%
                     List<Personne> list = (ArrayList<Personne>)request.getAttribute("eleves");
-                    for(int i = 0; i < list.size(); i++)
-                    {
-                        out.println(list.get(i).getNom());
-                    }
+
                 %>
-                <tr>
-                    <td>John</td>
+                <tr <c:forEach var="${list}" begin="1" end="10">
+                    >
+                    <td>${list.nom}</td>
                     <td>Doe</td>
                     <td>john@example.com</td>
                     <td>
                         <button type="button" class="btn btn-warning">Modifier</button>
                         <button type="button" class="btn btn-danger">Supprimer</button>
                     </td>
-                </tr>
+                </tr </c:forEach>>
                 <tr>
                     <td>Mary</td>
                     <td>Moe</td>

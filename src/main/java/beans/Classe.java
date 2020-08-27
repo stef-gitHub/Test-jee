@@ -7,6 +7,14 @@ public class Classe {
     private int annee;
     private Niveau niveau;
 
+    public Niveau getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(Niveau niveau) {
+        this.niveau = niveau;
+    }
+
     public Classe() {
     }
 
@@ -32,14 +40,6 @@ public class Classe {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public Niveau getNiveau() {
-        return niveau;
-    }
-
-    public void setNiveau(Niveau niveau) {
-        this.niveau = niveau;
     }
 
     public int getAnnee() {

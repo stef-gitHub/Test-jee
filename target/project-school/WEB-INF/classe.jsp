@@ -1,4 +1,7 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
+<%@ page import="beans.Classe" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: stef4
   Date: 26/08/2020
@@ -39,7 +42,8 @@
     </ul>
 </nav>
 <br>
-<h1 class="display-3" style="text-align: center" >Gestion des classes</h1>
+<h1 class="display-3" style="text-align: center" >
+</h1>
 <hr>
 <div style ="background-color: white;margin-top: 50px; max-width: 80%" class="container">
     <div class="row">
@@ -79,40 +83,28 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
+                    <th>Nom</th>
+                    <th>Année</th>
+                    <th>Niveau</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr>
+                <%
+                    List<Classe> list = (ArrayList<Classe>)request.getAttribute("classes");
+                    for (Classe classe : list) {
+                %>
                 <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
+                    <td> <% out.println(classe.getNom());%></td>
+                    <td> <% out.println(classe.getAnnee());%></td>
+                    <td><% out.println(classe.getNiveau().getLibelle());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
+                        <button type="button" class="btn btn-warning" onclick="modifierClasse('<% out.println(classe.getId_classe());%>')">Modifier</button>
+                        <button type="button" class="btn btn-danger" onclick="supprimerClasse('<% out.println(classe.getId_classe());%>')">Supprimer</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr>
+                <% } %>
                 </tbody>
             </table>
         </div>

@@ -1,64 +1,92 @@
 package dao;
 
+import beans.Personne;
+import beans.Professeur;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Properties;
 
 public class ProfesseurDAO {
 
-    public static void addProfesseur(Connection con, String nom, String prenom, String adresse, int cp, String ville, String mail) throws SQLException, ClassNotFoundException{
+    static Connection conn;
 
-        // the mysql insert statement
-        String query = " insert into professeur (nom, prenom, adresse, cp, ville, contact)"
-                + " values (?, ?, ?, ?, ?, ?)";
+    public static void connexionDB() throws SQLException, ClassNotFoundException, IOException {
+        FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
+        Properties p = new Properties();
+        p.load(fis);
+        String dname = (String) p.get("Dname");
+        String url = (String) p.get("URL");
+        String user = (String) p.get("Uname");
+        String passwd = (String) p.get("password");
+        Class.forName(dname);
+        conn = DriverManager.getConnection(url, user, passwd);
 
-        // create the mysql insert preparedstatement
-        PreparedStatement preparedStmt = con.prepareStatement(query);
-        preparedStmt.setString (1, nom);
-        preparedStmt.setString (2, prenom);
-        preparedStmt.setString (3, adresse);
-        preparedStmt.setInt (4, cp);
-        preparedStmt.setString (5, ville);
-        preparedStmt.setString (6, mail);
+        System.out.println("Connexion réussie !");
+    }
+    public void creerProfesseur(Professeur professeur) throws SQLException, IOException, ClassNotFoundException {
 
-        // execute the preparedstatement
-        preparedStmt.execute();
+        PreparedStatement preparedStatement = null;
+        connexionDB();
 
-        System.out.println(nom +" "+ nom + " a été ajouté ");
+        try {
+            // connexion = daoFactory.getConnection();
+            preparedStatement = conn.prepareStatement("INSERT INTO professeur(nom, annee, niveau) VALUES(?, ?, ?);");
+            preparedStatement.setString(1, professeur.getNom());
+            preparedStatement.setString(2, professeur.getPrenom());
+
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        conn.close();
     }
 
-    public static void deleteProfesseur(Connection con, int id) throws SQLException, ClassNotFoundException{
-        String query = "Delete FROM professeur where id_professeur = ? ";
+    public void modifierProfesseur(){
 
-        try (PreparedStatement preparedStmt = con.prepareStatement(query)) {
-            preparedStmt.setInt(1, id);
-            preparedStmt.execute();
+    }
 
-            System.out.println("id : " + id + " supprimé !");
+    public ArrayList<Professeur> afficherProfesseur() throws SQLException, IOException, ClassNotFoundException {
+
+        connexionDB();
+        ArrayList<Professeur> professeurs = new ArrayList<>();
+
+        try {
+            String query = "SELECT professeur.mail, personne.nom, personne.prenom  FROM professeur inner join personne ON professeur.id_personne = personne.id_personne";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next())
+            {
+                Professeur prof = new Professeur();
+                Personne personne = new Personne();
+
+                String mail = rs.getString("professeur.mail");
+                String nom = rs.getString("personne.nom");
+                String prenom = rs.getString("personne.prenom");
+
+                prof.setNom(nom);
+                prof.setPrenom(prenom);
+                prof.setAdresse_mail(mail);
+
+                System.out.println(prof.getNom() + " " + prof.getPrenom() + " "+ prof.getAdresse_mail());
+
+                professeurs.add(prof);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        conn.close();
 
-
+        return professeurs;
     }
 
-    public static void updateProfesseur(Connection con, String nom, String prenom, String adresse, int cp, String ville, String mail, int id) throws SQLException, ClassNotFoundException{
-        String query = "Update professeur set nom = ?, prenom = ?, adresse = ?, cp = ?, ville = ?, mail = ? where id_professeur = ?";
-
-        PreparedStatement preparedStmt = con.prepareStatement(query);
-
-        preparedStmt.setString(1, nom);
-        preparedStmt.setString(2, prenom);
-        preparedStmt.setString(3, adresse);
-        preparedStmt.setInt (4, cp);
-        preparedStmt.setString (5, ville);
-        preparedStmt.setString (6, mail);
-        preparedStmt.setInt(4, id);
-        preparedStmt.executeUpdate();
-
-        System.out.println("id : " + id + " mis à jour !");
-
-
+    public void supprimerProfesseur(){
     }
-
-
 }
+
+

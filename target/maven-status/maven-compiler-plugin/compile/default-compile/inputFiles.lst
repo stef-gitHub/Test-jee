@@ -1,5 +1,6 @@
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Cours.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Personne.java
+C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\servlets\ConnexionDB.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Bouquin.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Niveau.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\servlets\EmpruntServlet.java
@@ -7,6 +8,7 @@ C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Presence.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\servlets\AccueilServlet.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\servlets\ClasseServlet.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Materiel.java
+C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\connexion\test.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Note.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Administrateur.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Eleve.java
@@ -14,6 +16,7 @@ C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\servlets\ProfesseurServ
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Professeur.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\dao\ProfesseurDAO.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Classe.java
+C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\dao\ClasseDAO.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Emprunt.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\beans\Ecole.java
 C:\Users\Meunier\IdeaProjects\projet_ecole\src\main\java\dao\EleveDAO.java
