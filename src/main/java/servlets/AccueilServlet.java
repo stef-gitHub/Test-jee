@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AccueilServlet extends HttpServlet {
 
+     // ConnexionDB.connexionTest();
+
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         /* Création et initialisation du message. */
         String paramAuteur = request.getParameter( "auteur" );
@@ -25,11 +27,5 @@ public class AccueilServlet extends HttpServlet {
         request.setAttribute( "personne", premierBean );
         /* Transmission de la paire d'objets request/response à notre JSP */
         this.getServletContext().getRequestDispatcher( "/WEB-INF/accueil.jsp" ).forward( request, response );
-    }
-
-    public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        Classe classe = new Classe();
-        classe.setNom(request.getParameter("nom"));
-        this.getServletContext().getRequestDispatcher("/WEB-INF/bonjour.jsp").forward(request, response);
     }
 }

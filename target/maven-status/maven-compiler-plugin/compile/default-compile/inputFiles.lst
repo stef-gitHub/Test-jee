@@ -3,6 +3,7 @@ C:\Users\stef4\IdeaProjects\jee-project\src\main\java\servlets\AccueilServlet.ja
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\servlets\ProfesseurServlet.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Cours.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Note.java
+C:\Users\stef4\IdeaProjects\jee-project\src\main\java\connexion\test.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\servlets\ClasseServlet.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Niveau.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Professeur.java
@@ -13,6 +14,8 @@ C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Presence.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Ecole.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Eleve.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Administrateur.java
+C:\Users\stef4\IdeaProjects\jee-project\src\main\java\dao\ClasseDAO.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\servlets\EmpruntServlet.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Materiel.java
 C:\Users\stef4\IdeaProjects\jee-project\src\main\java\beans\Personne.java
+C:\Users\stef4\IdeaProjects\jee-project\src\main\java\servlets\ConnexionDB.java

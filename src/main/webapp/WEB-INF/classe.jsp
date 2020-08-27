@@ -1,4 +1,7 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
+<%@ page import="beans.Classe" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: stef4
   Date: 26/08/2020
@@ -39,7 +42,13 @@
     </ul>
 </nav>
 <br>
-<h1 class="display-3" style="text-align: center" >Gestion des classes</h1>
+<h1 class="display-3" style="text-align: center" >
+
+    <c:forEach var="i" begin="0" end="10" step="2">
+        <p>Un message n°<c:out value="${i}" /> !</p>
+    </c:forEach>
+
+</h1>
 <hr>
 <div style ="background-color: white;margin-top: 50px; max-width: 80%" class="container">
     <div class="row">
