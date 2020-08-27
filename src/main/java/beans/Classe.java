@@ -5,7 +5,15 @@ public class Classe {
     private Ecole ecole;
     private String nom;
     private int annee;
-    private Niveau niveau;
+    private int id_niveau;
+
+    public int getId_niveau() {
+        return id_niveau;
+    }
+
+    public void setId_niveau(int id_niveau) {
+        this.id_niveau = id_niveau;
+    }
 
     public Classe() {
     }
@@ -32,14 +40,6 @@ public class Classe {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public Niveau getNiveau() {
-        return niveau;
-    }
-
-    public void setNiveau(Niveau niveau) {
-        this.niveau = niveau;
     }
 
     public int getAnnee() {
