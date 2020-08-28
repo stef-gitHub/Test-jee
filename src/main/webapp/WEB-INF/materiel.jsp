@@ -1,6 +1,6 @@
-<%@ page import="beans.Professeur" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="beans.Materiel" %><%--
   Created by IntelliJ IDEA.
   User: stef4
   Date: 26/08/2020
@@ -18,7 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="assets/javascript/bootstrap.min.js"></script>
 
-    <title>Gestion des professeurs</title>
+    <title>Gestion du matériel</title>
 </head>
 <body style =" background-color: #E1E1E1;">
 <nav style="background-color : #373737" class="navbar navbar-expand-sm navbar-dark">
@@ -48,91 +48,64 @@
     </ul>
 </nav>
 <br>
-<h1 class="display-3" style="text-align: center" >Gestion des professeurs</h1>
+<h1 class="display-3" style="text-align: center" >Gestion du matériel</h1>
 <hr>
 <div style ="background-color: white;margin-top: 50px; max-width: 80%" class="container">
     <div class="row">
         <div class="col-md-12">
             <br>
             <div class="float-right"> <!-- Button to Open the Modal -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createProfesseur">
-                    Créer un professeur
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createMateriel">
+                    Ajouter un matériel
                 </button>
 
                 <!-- The Modal CREATE -->
-                <div class="modal fade" id="createProfesseur">
+                <div class="modal fade" id="createMateriel">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="professeur" method="post">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Création d'un professeur</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
+                            <form action="materiel" method="post">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Création d'un matériel</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
 
-                            <!-- Modal body -->
-                            <div class="modal-body">
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="nomNomMateriel">Nom</label>
+                                        <input type="text" class="form-control" id="nomNomMateriel" name="nomNomMateriel" required>
+                                    </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="nomProfesseur">Nom</label>
-                                        <input type="text" class="form-control" id="nomProfesseurCreate" name="nomProfesseurCreate" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="prenomProfesseur">Prénom</label>
-                                        <input type="text" class="form-control" id="prenomProfesseurCreate" name="prenomProfesseurCreate" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adresseProfesseur">Adresse</label>
-                                        <input type="text" class="form-control" id="adresseProfesseurCreate" name="adresseProfesseurCreate" required>
-                                    </div>
-
-                                    <div class="form-group row" style="margin-left:1px">
-                                        <div class="col-xs-2">
-                                        <label for="cpProfesseur">Code Postal</label>
-                                        <input type="text" class="form-control" id="cpProfesseurCreate" name="cpProfesseurCreate" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="villeProfesseur">Ville</label>
-                                        <input type="text" class="form-control" id="villeProfesseurCreate" name="villeProfesseurCreate" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="mailProfesseur">Adresse mail</label>
-                                        <input type="text" class="form-control" id="mailProfesseurCreate" name="mailProfesseurCreate" >
-                                    </div>
-
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-success" name="submit" value="Créer"/>
-                            </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-success" name="submit" value="Créer Matériel"/>
+                                </div>
                             </form>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <h2 style="text-align: center">Les professeurs</h2>
+            <h2 style="text-align: center">Les Matériels</h2>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
                     <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
+                    <th>Date</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                        <%
-                    List<Professeur> list = (ArrayList<Professeur>)request.getAttribute("professeurs");
-                    for (Professeur professeur : list) {
+                <%
+                    List<Materiel> list = (ArrayList<Materiel>)request.getAttribute("materiels");
+                    for (Materiel materiel : list) {
                 %>
                 <tr>
 
-                    <td> <% out.println(professeur.getNom());%></td>
-                    <td> <% out.println(professeur.getPrenom());%></td>
-                    <td> <% out.println(professeur.getAdresse_mail());%></td>
+                    <td> <% out.println(materiel.getNom());%></td>
+                    <td> <% out.println(materiel.getDate());%></td>
                     <td>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateProfesseur">Modifier</button>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteProfesseur">Supprimer</button>
