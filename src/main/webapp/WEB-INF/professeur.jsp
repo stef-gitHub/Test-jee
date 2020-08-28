@@ -134,8 +134,8 @@
                     <td> <% out.println(professeur.getPrenom());%></td>
                     <td> <% out.println(professeur.getAdresse_mail());%></td>
                     <td>
-                        <input data-toggle="modal" data-target="#updateProfesseur" type="button" class="btn btn-success" onclick="modifier('<% out.print(professeur.getId_personne());%>', '<% out.print(professeur.getAdresse_mail());%>', '<% out.print(professeur.getAdresse());%>', '<% out.print(professeur.getCp());%>', '<% out.print(professeur.getVille());%>', '<% out.print(professeur.getNom());%>', '<% out.print(professeur.getPrenom());%>')" value="modifier"/>
-                        <form action="professeur" method="post">
+                        <input data-toggle="modal" data-target="#updateProfesseur" type="button" class="btn btn-warning" onclick="Modifier('<% out.print(professeur.getId_personne());%>', '<% out.print(professeur.getAdresse_mail());%>', '<% out.print(professeur.getAdresse());%>', '<% out.print(professeur.getCp());%>', '<% out.print(professeur.getVille());%>', '<% out.print(professeur.getNom());%>', '<% out.print(professeur.getPrenom());%>')" value="Modifier"/>
+                        <form class="float-right" action="professeur" method="post">
                             <input hidden type="text" name="idProf" value="<% out.print(professeur.getId_personne());%>"/>
                             <input type="submit" class="btn btn-danger" name="supprimerProf" value="Supprimer"/>
                         </form>
@@ -230,7 +230,7 @@
 </div>
 </body>
 <script>
-    function modifier(id, mail, adresse, cp, ville, nom, prenom){
+    function Modifier(id, mail, adresse, cp, ville, nom, prenom){
         $("#idProfModifier").attr('value', id);
         $("#nomProfesseurUpdate").attr('value', nom);
         $("#prenomProfesseurUpdate").attr('value', prenom);

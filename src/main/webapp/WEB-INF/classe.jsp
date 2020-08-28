@@ -48,7 +48,7 @@
     </ul>
 </nav>
 <br>
-<h1 class="display-3" style="text-align: center" >
+<h1 class="display-3" style="text-align: center" > Gestion des classes
 </h1>
 <hr>
 <div style ="background-color: white;margin-top: 50px; max-width: 80%" class="container">
@@ -138,8 +138,8 @@
                     <td> <% out.print(classe.getAnnee());%></td>
                     <td><% out.print(classe.getNiveau().getLibelle());%></td>
                     <td>
-                        <input data-toggle="modal" data-target="#modifierProf" type="button" class="btn btn-success" onclick="modifier('<% out.print(classe.getId_classe());%>', '<% out.print(classe.getNom());%>', '<% out.print(classe.getAnnee());%>', '<% out.print(classe.getNiveau().getId_niveau());%>')" value="modifier"/>
-                        <form action="classe" method="post">
+                        <input data-toggle="modal" data-target="#modifierProf" type="button" class="btn btn-warning" onclick="modifier('<% out.print(classe.getId_classe());%>', '<% out.print(classe.getNom());%>', '<% out.print(classe.getAnnee());%>', '<% out.print(classe.getNiveau().getId_niveau());%>')" value="Modifier"/>
+                        <form class="float-right" action="classe" method="post">
                             <input hidden type="text" name="idClasse" value="<% out.print(classe.getId_classe());%>"/>
                             <input type="submit" class="btn btn-danger" name="supprimerClasse" value="Supprimer"/>
                         </form>

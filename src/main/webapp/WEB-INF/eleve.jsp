@@ -144,7 +144,7 @@
                     <td><% out.println(eleve.getMere());%></td>
                     <td><% out.println(eleve.getAdresse());%></td>
                     <td>
-                        <input data-toggle="modal" data-target="#updateStudent" type="button" class="btn btn-success" onclick="update('<%=eleve.getId_personne()%>', '<%=eleve.getNom()%>', '<%=eleve.getPrenom()%>', '<%=eleve.getAdresse()%>', '<%=eleve.getCp()%>', '<%=eleve.getVille()%>', '<%=eleve.getPere()%>', '<%=eleve.getMere()%>')" value="Modifier"/>
+                        <input  data-toggle="modal" data-target="#updateStudent" type="button" class="btn btn-warning" onclick="update('<%=eleve.getId_personne()%>', '<%=eleve.getNom()%>', '<%=eleve.getPrenom()%>', '<%=eleve.getAdresse()%>', '<%=eleve.getCp()%>', '<%=eleve.getVille()%>', '<%=eleve.getPere()%>', '<%=eleve.getMere()%>')" value="Modifier"/>
 
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteStudent">Supprimer</button>
                     </td>
