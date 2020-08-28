@@ -57,7 +57,7 @@
                 <div class="modal fade" id="createProfesseur">
                     <div class="modal-dialog">
                         <div class="modal-content">
-
+                            <form action="professeur" method="post">
                             <!-- Modal Header -->
                             <div class="modal-header">
                                 <h4 class="modal-title">Création d'un professeur</h4>
@@ -66,43 +66,44 @@
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form>
+
                                     <div class="form-group">
                                         <label for="nomProfesseur">Nom</label>
-                                        <input type="text" class="form-control" id="nomProfesseur" required>
+                                        <input type="text" class="form-control" id="nomProfesseurCreate" name="nomProfesseurCreate" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="prenomProfesseur">Prénom</label>
-                                        <input type="text" class="form-control" id="prenomProfesseur" required>
+                                        <input type="text" class="form-control" id="prenomProfesseurCreate" name="prenomProfesseurCreate" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="adresseProfesseur">Adresse</label>
-                                        <input type="text" class="form-control" id="adresseProfesseur" required>
+                                        <input type="text" class="form-control" id="adresseProfesseurCreate" name="adresseProfesseurCreate" required>
                                     </div>
 
                                     <div class="form-group row" style="margin-left:1px">
                                         <div class="col-xs-2">
                                         <label for="cpProfesseur">Code Postal</label>
-                                        <input type="text" class="form-control" id="cpProfesseur" required>
+                                        <input type="text" class="form-control" id="cpProfesseurCreate" name="cpProfesseurCreate" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="villeProfesseur">Ville</label>
-                                        <input type="text" class="form-control" id="villeProfesseur" required>
+                                        <input type="text" class="form-control" id="villeProfesseurCreate" name="villeProfesseurCreate" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="mailProfesseur">Adresse mail</label>
-                                        <input type="text" class="form-control" id="mailProfesseur">
+                                        <input type="text" class="form-control" id="mailProfesseurCreate" name="mailProfesseurCreate" >
                                     </div>
-                                </form>
+
                             </div>
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Créer</button>
+                                <input type="submit" class="btn btn-success" name="submit" value="Créer"/>
                             </div>
+                            </form>
                         </div>
+
                     </div>
                 </div>
             </div>

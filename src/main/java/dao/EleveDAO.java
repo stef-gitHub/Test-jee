@@ -2,9 +2,6 @@ package dao;
 
 import beans.Eleve;
 import beans.Personne;
-import beans.Professeur;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -31,30 +28,9 @@ public class EleveDAO {
         return conn;
     }
 
-    /*public static void addEleve(String nom, String prenom, String adresse, int cp, String ville, String nom_pere, String nom_mere) throws SQLException, ClassNotFoundException{
 
-        // the mysql insert statement
-        String query = " insert into professeur (nom, prenom, adresse, cp, ville, nom_pere, nom_mere)"
-                + " values (?, ?, ?, ?, ?, ?, ?)";
-
-        // create the mysql insert preparedstatement
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
-        preparedStmt.setString (1, nom);
-        preparedStmt.setString (2, prenom);
-        preparedStmt.setString (3, adresse);
-        preparedStmt.setInt (4, cp);
-        preparedStmt.setString (5, ville);
-        preparedStmt.setString (6, nom_pere);
-        preparedStmt.setString (7, nom_mere);
-
-        // execute the preparedstatement
-        preparedStmt.execute();
-
-        System.out.println(nom +" "+ nom + " a été ajouté ");
-    }*/
-
-    public static void addEleve(Eleve eleve) throws SQLException, ClassNotFoundException{
-
+    public static void addEleve(Eleve eleve) throws SQLException, ClassNotFoundException, IOException {
+        connexionDB();
         // the mysql insert statement
         String query = " insert into personne (nom, prenom, adresse, code_postal, ville)"
                 + " values (?, ?, ?, ?, ?)";
@@ -66,8 +42,6 @@ public class EleveDAO {
         preparedStmt.setString (3, eleve.getAdresse());
         preparedStmt.setInt (4, eleve.getCp());
         preparedStmt.setString (5, eleve.getVille());
-        //preparedStmt.setString (6, nom_pere);
-        //preparedStmt.setString (7, nom_mere);
 
         // execute the preparedstatement
         preparedStmt.execute();
@@ -104,6 +78,7 @@ public class EleveDAO {
 
         preparedStatement.execute();
         System.out.println(eleve.getMere());
+        conn.close();
     }
 
     public static void deleteEleve(int id) throws SQLException, ClassNotFoundException{
@@ -170,8 +145,9 @@ public class EleveDAO {
             // print the result
             System.out.format("%s, %s, %s, %s\n", nom, prenom, nom_pere, nom_mere);
         }
-
+        conn.close();
         return listEleves;
+
 
     }
 }

@@ -21,6 +21,7 @@
     <title>Gestion des élèves</title>
 </head>
 <body style =" background-color: #EED4D6;">
+
 <nav style="background-color : #97252D" class="navbar navbar-expand-sm navbar-dark">
     <!-- Brand -->
     <a class="navbar-brand" href="accueil">Accueil</a>
@@ -57,6 +58,7 @@
                 <div class="modal fade" id="createStudent">
                     <div class="modal-dialog">
                         <div class="modal-content">
+                            <form action="eleve" method="post">
 
                             <!-- Modal Header -->
                             <div class="modal-header">
@@ -66,46 +68,46 @@
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form>
+
                                     <div class="form-group">
-                                        <label for="nomEleve">Nom</label>
-                                        <input type="text" class="form-control" id="nomEleve" required>
+                                        <label for="nomEleveCreate">Nom</label>
+                                        <input type="text" class="form-control" id="nomEleveCreate" required name="nomEleveCreate">
                                     </div>
                                     <div class="form-group">
-                                        <label for="prenomEleve">Prénom</label>
-                                        <input type="text" class="form-control" id="prenomEleve" required>
+                                        <label for="prenomEleveCreate">Prénom</label>
+                                        <input type="text" class="form-control" id="prenomEleveCreate" name="prenomEleveCreate" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="adresseEleve">Adresse</label>
-                                        <input type="text" class="form-control" id="adresseEleve" required>
+                                        <label for="adresseEleveCreate">Adresse</label>
+                                        <input type="text" class="form-control" id="adresseEleveCreate" name="adresseEleveCreate" required>
                                     </div>
 
                                     <div class="form-group row" style="margin-left:1px">
                                         <div class="col-xs-2">
-                                            <label for="cpEleve">Code Postal</label>
-                                            <input type="text" class="form-control" id="cpEleve" required>
+                                            <label for="cpEleveCreate">Code Postal</label>
+                                            <input type="text" class="form-control" id="cpEleveCreate" name="cpEleveCreate" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="villeEleve">Ville</label>
-                                        <input type="text" class="form-control" id="villeEleve" required>
+                                        <label for="villeEleveCreate">Ville</label>
+                                        <input type="text" class="form-control" id="villeEleveCreate" name="villeEleveCreate" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="pereEleve">Père</label>
-                                        <input type="text" class="form-control" id="pereEleve">
+                                        <label for="pereEleveCreate">Père</label>
+                                        <input type="text" class="form-control" id="pereEleveCreate" name="pereEleveCreate">
                                     </div>
                                     <div class="form-group">
-                                        <label for="mereEleve">Mère</label>
-                                        <input type="text" class="form-control" id="mereEleve">
+                                        <label for="mereEleveCreate">Mère</label>
+                                        <input type="text" class="form-control" id="mereEleveCreate" name="mereEleveCreate">
                                     </div>
-                                </form>
+
                             </div>
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Créer</button>
+                                <input type="submit" class="btn btn-success" name="submit" value="Créer"/>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -144,88 +146,7 @@
         <br>
         <br>
 
-        <!-- The Modal UPDATE student-->
-        <div class="modal fade" id="updateStudent">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modifier un élève</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="nomEleve">Nom</label>
-                                <input type="text" class="form-control" id="nomEleve" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="prenomEleve">Prénom</label>
-                                <input type="text" class="form-control" id="prenomEleve" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="adresseEleve">Adresse</label>
-                                <input type="text" class="form-control" id="adresseEleve" required>
-                            </div>
-
-                            <div class="form-group row" style="margin-left:1px">
-                                <div class="col-xs-2">
-                                    <label for="cpEleve">Code Postal</label>
-                                    <input type="text" class="form-control" id="cpEleve" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="villeEleve">Ville</label>
-                                <input type="text" class="form-control" id="villeEleve" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="pereEleve">Père</label>
-                                <input type="text" class="form-control" id="pereEleve">
-                            </div>
-                            <div class="form-group">
-                                <label for="mereEleve">Mère</label>
-                                <input type="text" class="form-control" id="mereEleve">
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Modifier</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- The Modal DELETE student-->
-        <div class="modal fade" id="deleteStudent">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Supprimer un élève</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <p>Etes-vous sûr de vouloir supprimer cet élève ?</p>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Supprimer</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
+</div>
 </body>
 </html>
