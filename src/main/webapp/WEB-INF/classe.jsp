@@ -50,31 +50,64 @@
         <div class="col-md-12">
             <br>
             <div class="float-right"> <!-- Button to Open the Modal -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#creerClasse">
                     Créer une classe
                 </button>
 
                 <!-- The Modal -->
-                <div class="modal fade" id="myModal">
+                <div class="modal fade" id="creerClasse">
                     <div class="modal-dialog">
                         <div class="modal-content">
+                            <form action="classe" method="post">
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Modal Heading</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Création d'un élève</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
 
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                Modal body..
-                            </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
 
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Créer</button>
-                            </div>
+                                    <div class="form-group">
+                                        <label for="creerNomClasse">Nom</label>
+                                        <input type="text" class="form-control" id="creerNomClasse" name="creerNomClasse" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="creerAnneeClasse">Année</label>
+                                        <input type="number" min="1900" max="2099" step="1" value="2020" class="form-control" id="creerAnneeClasse" name="creerAnneeClasse" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Niveau</label>
+                                        <div>
+                                            <input type="radio" id="cp"
+                                                   name="creerNiveauClasse" value="1">
+                                            <label for="cp">CP</label>
+
+                                            <input type="radio" id="ce1"
+                                                   name="creerNiveauClasse" value="2">
+                                            <label for="ce1">CE1</label>
+
+                                            <input type="radio" id="ce2"
+                                                   name="creerNiveauClasse" value="3">
+                                            <label for="ce2">CE2</label>
+
+                                            <input type="radio" id="cm1"
+                                                   name="creerNiveauClasse" value="4">
+                                            <label for="cm1">CM1</label>
+
+                                            <input type="radio" id="cm2"
+                                                   name="creerNiveauClasse" value="5">
+                                            <label for="cm2">CM2</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-success" name="submit" value="Créer"/>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -100,8 +133,14 @@
                     <td> <% out.println(classe.getAnnee());%></td>
                     <td><% out.println(classe.getNiveau().getLibelle());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning" onclick="modifierClasse('<% out.println(classe.getId_classe());%>')">Modifier</button>
-                        <button type="button" class="btn btn-danger" onclick="supprimerClasse('<% out.println(classe.getId_classe());%>')">Supprimer</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#creerClasse">
+                            Créer une classe
+                        </button>
+                        <form action="classe" method="post">
+                            <input hidden type="text" name="idClasse" value="<% out.println(classe.getId_classe());%>"/>
+                            <input type="submit" class="btn btn-danger" name="supprimerClasse" value="Supprimer"/>
+                        </form>
+
                     </td>
                 </tr>
                 <% } %>
@@ -111,6 +150,6 @@
         <br>
         <br>
 
-    </div>
+    </div></div>
 </body>
 </html>
