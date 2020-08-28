@@ -86,8 +86,8 @@
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>
           <configuration>
-            <port>8088</port>
-            <path>/jee-project</path>
+            <port>8080</port>
+            <path>/web</path>
           </configuration>
         </plugin>
         <plugin>

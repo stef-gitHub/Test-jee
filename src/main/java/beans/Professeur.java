@@ -3,6 +3,16 @@ package beans;
 import java.util.ArrayList;
 
 public class Professeur extends Personne{
+    private int id_professeur;
+
+    public int getId_professeur() {
+        return id_professeur;
+    }
+
+    public void setId_professeur(int id_professeur) {
+        this.id_professeur = id_professeur;
+    }
+
     private String adresse_mail;
     private ArrayList<Emprunt> listEmprunts;
     private ArrayList<Classe> listClasses;
