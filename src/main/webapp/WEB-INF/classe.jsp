@@ -138,7 +138,7 @@
                     <td> <% out.print(classe.getAnnee());%></td>
                     <td><% out.print(classe.getNiveau().getLibelle());%></td>
                     <td>
-                        <input data-toggle="modal" data-target="#modifierClasse" type="button" class="btn btn-success" onclick="modifier('<% out.print(classe.getId_classe());%>', '<% out.print(classe.getNom());%>', '<% out.print(classe.getAnnee());%>', '<% out.print(classe.getNiveau().getId_niveau());%>')" value="modifier"/>
+                        <input data-toggle="modal" data-target="#modifierProf" type="button" class="btn btn-success" onclick="modifier('<% out.print(classe.getId_classe());%>', '<% out.print(classe.getNom());%>', '<% out.print(classe.getAnnee());%>', '<% out.print(classe.getNiveau().getId_niveau());%>')" value="modifier"/>
                         <form action="classe" method="post">
                             <input hidden type="text" name="idClasse" value="<% out.print(classe.getId_classe());%>"/>
                             <input type="submit" class="btn btn-danger" name="supprimerClasse" value="Supprimer"/>
@@ -150,12 +150,12 @@
                 </tbody>
             </table>
 
-            <div class="modal fade" id="modifierClasse">
+            <div class="modal fade" id="modifierProf">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form action="classe" method="post">
 
-                            <input hidden type="text" name="idClasse" value="" id="idclasseModifier"/>
+                            <input hidden type="text" value="" name="idclasseModifier" id="idclasseModifier"/>
 
                             <!-- Modal Header -->
                             <div class="modal-header">
@@ -202,7 +202,7 @@
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-success" name="submit" value="Créer"/>
+                                <input type="submit" class="btn btn-success" name="submit" value="Modifier"/>
                             </div>
                         </form>
                     </div>
@@ -221,7 +221,7 @@
         $("#idclasseModifier").attr('value', id_classe);
         $("#modifierNomClasse").attr('value', nom_classe);
         $("#modifierAnneeClasse").attr('value', annee_classe);
-        //$("modifierNomClasse").val(id_niveau);
+        $("input[name='modifierNiveauClasse'][value='"+id_niveau+"']").prop('checked', true);
 
     }
 </script>

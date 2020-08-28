@@ -30,22 +30,82 @@ public class EmpruntDAO {
         return conn;
     }
     /**
-     * Créer un élève
+     * Créer un emprunt
      * */
-    public static void addEmprunt() throws SQLException, ClassNotFoundException {
+    public static void addEmprunt(Emprunt emprunt) throws SQLException, ClassNotFoundException, IOException {
+
+        PreparedStatement preparedStatement = null;
+        connexionDB();
+        System.out.println("creerClasse");
+
+        preparedStatement = conn.prepareStatement("INSERT INTO emprunt(id_professeur, id_livre, id_materiel) VALUES(?, ?, ?);");
+        preparedStatement.setInt(1, emprunt.getProfesseur().getId_professeur());
+        preparedStatement.setInt(2, emprunt.getBouquin().getId_bouquin());
+        preparedStatement.setInt(3, emprunt.getMateriel().getId_materiel());
+
+        preparedStatement.executeUpdate();
+        System.out.println(emprunt);
+
+        conn.close();
     }
 
-    /**
-     * Supprimer un élève
-     * */
-    public static void deleteEmprunt(int id) throws SQLException, ClassNotFoundException{
+    public static Professeur getProfFromId(int id) throws SQLException, IOException, ClassNotFoundException {
+
+        connexionDB();
+        Professeur prof = new Professeur();
+
+        String query = "SELECT * FROM professeur, personne where personne.id_personne = professeur.id_personne and professeur.id_professeur = "+id;
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next())
+        {
+            prof.setId_professeur(rs.getInt("professeur.id_professeur"));
+            prof.setNom(rs.getString("personne.nom"));
+            prof.setPrenom(rs.getString("personne.prenom"));
+        }
+        conn.close();
+
+        return prof;
+    }
+    public static Bouquin getBouquinFromId(int id) throws SQLException, IOException, ClassNotFoundException {
+
+        connexionDB();
+        Bouquin bouquin = new Bouquin();
+
+        String query = "SELECT * FROM livre where id_livre = "+id;
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next())
+        {
+            bouquin.setId_bouquin(rs.getInt("livre.id_livre"));
+            bouquin.setNom("livre.libelle");
+        }
+        conn.close();
+
+        return bouquin;
     }
 
-    /**
-     * Modifier un élève
-     * */
-    public static void updateEmprunt() throws SQLException, ClassNotFoundException{
+    public static Materiel getMateriel(int id) throws SQLException, IOException, ClassNotFoundException {
+
+        connexionDB();
+        Materiel materiel = new Materiel();
+
+        String query = "SELECT * FROM materiel where id_materiel = "+id;
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next())
+        {
+            materiel.setId_materiel(rs.getInt("materiel.id_materiel"));
+            materiel.setNom("materiel.nom");
+        }
+        conn.close();
+
+        return materiel;
     }
+
 
     /**
      * Afficher les élèves

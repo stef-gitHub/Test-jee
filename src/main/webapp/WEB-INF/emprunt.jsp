@@ -62,23 +62,52 @@
                 <div class="modal fade" id="myModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
+                            <form action="emprunt" method="post">
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Modal Heading</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Création d'un élève</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
 
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                Modal body..
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Créer</button>
-                            </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <select id="selectProfesseurs" name="creerProfesseur">
+                                            <%
+                                                List<Emprunt> listProfs = (ArrayList<Emprunt>)request.getAttribute("emprunts");
+                                                for (Emprunt emprunts : listProfs) {
+                                            %>
+                                            <option value="<% out.println(emprunts.getProfesseur().getId_professeur());%>"><% out.println(emprunts.getProfesseur().getNom());%></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                        <br>
+                                    <div class="form-group">
+                                        <select id="selectLivre" name="creerLivre">
+                                            <%
+                                                List<Emprunt> listLivres = (ArrayList<Emprunt>)request.getAttribute("emprunts");
+                                                for (Emprunt emprunts : listLivres) {
+                                            %>
+                                            <option value="<% out.println(emprunts.getBouquin().getId_bouquin());%>"><% out.println(emprunts.getBouquin().getNom());%></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <select id="selectMateriel" name="creerMateriel">
+                                                <%
+                                                    List<Emprunt> listMateriel = (ArrayList<Emprunt>)request.getAttribute("emprunts");
+                                                    for (Emprunt emprunts : listMateriel) {
+                                                %>
+                                                <option value="<% out.println(emprunts.getMateriel().getId_materiel());%>"><% out.println(emprunts.getMateriel().getNom());%></option>
+                                                <% } %>
+                                            </select>
+                                        </div>
+                                <!-- Modal footer -->
+                                    <input type="submit" class="btn btn-danger" name="creerEmprunt" value="créer"/>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -107,8 +136,10 @@
                     <td> <% out.println(emprunt.getDate_debut());%></td>
                     <td> <% out.println(emprunt.getDate_fin());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateProfesseur">Modifier</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteProfesseur">Supprimer</button>
+                        <form action="emprunt" method="post">
+                            <input hidden type="text" name="idEmprunt" value="<% out.print(emprunt.getId_emprunt());%>"/>
+                            <input type="submit" class="btn btn-danger" name="supprimerEmprunt" value="Supprimer"/>
+                        </form>
                     </td>
                 </tr>
                 <% } %>
