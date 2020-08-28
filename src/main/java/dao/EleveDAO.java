@@ -120,7 +120,7 @@ public class EleveDAO {
     public static ArrayList<Personne> displayEleve() throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
         ArrayList<Personne> listEleves = new ArrayList<>();
-        String query = "SELECT personne.nom, personne.prenom, eleve.nom_pere, eleve.nom_mere FROM personne inner join eleve on personne.id_personne = eleve.id_personne";
+        String query = "SELECT personne.id_personne, personne.nom, personne.prenom, eleve.nom_pere, eleve.nom_mere FROM personne inner join eleve on personne.id_personne = eleve.id_personne";
 
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
@@ -129,12 +129,13 @@ public class EleveDAO {
         while (rs.next())
         {
             Eleve eleve = new Eleve();
-
+            Integer id = rs.getInt("personne.id_personne");
             String nom = rs.getString("personne.nom");
             String prenom = rs.getString("personne.prenom");
             String nom_pere = rs.getString("eleve.nom_pere");
             String nom_mere = rs.getString("eleve.nom_mere");
 
+            eleve.setId_personne(id);
             eleve.setNom(nom);
             eleve.setPrenom(prenom);
             eleve.setPere(nom_pere);
@@ -143,7 +144,7 @@ public class EleveDAO {
             listEleves.add(eleve);
 
             // print the result
-            System.out.format("%s, %s, %s, %s\n", nom, prenom, nom_pere, nom_mere);
+            System.out.format("%s, %s, %s, %s, %s\n", id, nom, prenom, nom_pere, nom_mere);
         }
         conn.close();
         return listEleves;

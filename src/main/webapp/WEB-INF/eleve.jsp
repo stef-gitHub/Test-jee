@@ -116,6 +116,7 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
+                    <th class="hide">id</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Père</th>
@@ -129,14 +130,17 @@
                     for (Eleve eleve : listEleves){
                 %>
                 <tr>
-
+                    <td><% out.println(eleve.getId_personne());%></td>
                     <td><% out.println(eleve.getNom());%></td>
                     <td><% out.println(eleve.getPrenom());%></td>
                     <td><% out.println(eleve.getPere());%></td>
                     <td><% out.println(eleve.getMere());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateStudent">Modifier</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteStudent">Supprimer</button>
+                        <form action="eleve?id=<%=eleve.getId_personne()%>" method="get">
+                            <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#updateStudent" name="buttonUpdate" value="<%=eleve.getId_personne()%>">Modifier</button>
+
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteStudent">Supprimer</button>
+                        </form>
                     </td>
                 </tr>
                 <% } %>
@@ -145,7 +149,63 @@
         </div>
         <br>
         <br>
+        <!-- The Modal UPDATE student-->
+        <div class="modal fade" id="updateStudent">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="eleve?id=" method="post">
 
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Modifier un élève</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="nomEleveCreate">Nom</label>
+                                <input type="text" class="form-control" id="nomEleveUpdate" name="nomEleveUpdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenomEleveCreate">Prénom</label>
+                                <input type="text" class="form-control" id="prenomEleveUpdate" name="prenomEleveUpdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="adresseEleveCreate">Adresse</label>
+                                <input type="text" class="form-control" id="adresseEleveUpdate" name="adresseEleveUpdate">
+                            </div>
+
+                            <div class="form-group row" style="margin-left:1px">
+                                <div class="col-xs-2">
+                                    <label for="cpEleveCreate">Code Postal</label>
+                                    <input type="text" class="form-control" id="cpEleveUpdate" name="cpEleveUpdate">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="villeEleveCreate">Ville</label>
+                                <input type="text" class="form-control" id="villeEleveUpdate" name="villeEleveUpdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="pereEleveCreate">Père</label>
+                                <input type="text" class="form-control" id="pereEleveUpdate" name="pereEleveUpdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="mereEleveCreate">Mère</label>
+                                <input type="text" class="form-control" id="mereEleveUpdate" name="mereEleveUpdate">
+                            </div>
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success" name="submit" value="Modifier"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

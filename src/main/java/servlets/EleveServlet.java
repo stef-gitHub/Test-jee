@@ -23,12 +23,17 @@ public class EleveServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+//UPDATE Student
+        String buttonUpdate = request.getParameter("buttonUpdate");
+        System.out.println("buttonUpdate: " + buttonUpdate);
+
         this.getServletContext().getRequestDispatcher( "/WEB-INF/eleve.jsp" ).forward( request, response );
     }
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-
+        //CREATE Student
         String nom = request.getParameter("nomEleveCreate");
         String prenom = request.getParameter("prenomEleveCreate");
         String adresse = request.getParameter("adresseEleveCreate");
@@ -56,6 +61,12 @@ public class EleveServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+
+
+
+
+
 
         response.sendRedirect("eleve");
     }
