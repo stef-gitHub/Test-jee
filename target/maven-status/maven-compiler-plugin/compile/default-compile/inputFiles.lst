@@ -12,6 +12,7 @@ C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\beans\Niveau.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\dao\EmpruntDAO.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\servlets\AccueilServlet.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\beans\Ecole.java
+C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\servlets\BouquinServlet.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\beans\Bouquin.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\dao\EleveDAO.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\dao\MaterielDAO.java
@@ -19,9 +20,9 @@ C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\dao\ProfesseurDAO.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\servlets\EmpruntServlet.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\beans\Presence.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\beans\Classe.java
-C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\servlets\LivreServlet.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\beans\Cours.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\beans\Eleve.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\servlets\MaterielServlet.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\servlets\ConnexionDB.java
 C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\servlets\EleveServlet.java
+C:\Users\marvi\IdeaProjects\Test-jee\src\main\java\dao\BouquinDAO.java

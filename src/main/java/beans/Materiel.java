@@ -7,6 +7,9 @@ public class Materiel {
     private String nom;
     private Date date;
 
+    public Materiel() {
+    }
+
     public int getId_materiel() {
         return id_materiel;
     }

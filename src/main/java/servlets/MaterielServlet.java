@@ -23,4 +23,27 @@ public class MaterielServlet extends HttpServlet {
         }
         this.getServletContext().getRequestDispatcher( "/WEB-INF/materiel.jsp" ).forward( request, response );
     }
+    public void doPost( HttpServletRequest request, HttpServletResponse response ) throws IOException {
+        try {
+            MaterielDAO materielDAO = new MaterielDAO();
+
+            if (request.getParameter("supprimerMateriel") != null) {
+                System.out.println("supprimer Materiel!");
+                materielDAO.supprimerMateriel(Integer.parseInt(request.getParameter("id_materiel")));
+            } else if (request.getParameter("nomMateriel") != null) {
+                System.out.println("Materiel creer !");
+                Materiel m = new Materiel();
+                m.setNom(request.getParameter("nomMateriel"));
+                materielDAO.creerMateriel(m);
+            } else {
+                // ???
+            }
+            response.sendRedirect("materiel");
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
