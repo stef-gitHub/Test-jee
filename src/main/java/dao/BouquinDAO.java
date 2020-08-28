@@ -1,5 +1,6 @@
 package dao;
 
+import beans.Bouquin;
 import beans.Materiel;
 
 import java.io.FileInputStream;
@@ -9,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class MaterielDAO {
+public class BouquinDAO {
     static Connection conn;
 
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
@@ -28,61 +29,64 @@ public class MaterielDAO {
         return conn;
     }
 
-    public static ArrayList<Materiel> displayMateriel() throws SQLException, ClassNotFoundException, IOException {
+    public static ArrayList<Bouquin> displayLivre() throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
-        ArrayList<Materiel> materiels = new ArrayList<>();
-        String query = "SELECT * FROM materiel";
+        ArrayList<Bouquin> bouquins = new ArrayList<>();
+        String query = "SELECT * FROM livre";
 
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
 
 
         while (rs.next()) {
-            Materiel materiel = new Materiel();
+            Bouquin bouquin = new Bouquin();
 
-            String nom = rs.getString("materiel.nom");
-            Date date_achat = rs.getDate("materiel.date_achat");
+            String nom = rs.getString("livre.libelle");
+            String auteur = rs.getString("livre.auteur");
+            Date date = rs.getDate("livre.date");
 
-            materiel.setNom(nom);
-            materiel.setDate(date_achat);
+            bouquin.setNom(nom);
+            bouquin.setAuteur(auteur);
+            bouquin.setDate(date);
 
-            materiels.add(materiel);
+            bouquins.add(bouquin);
 
             // print the result
-            System.out.format("%s, %s\n", nom, date_achat);
+            System.out.format("%s, %s\n", nom, auteur, date);
         }
         conn.close();
-        return materiels;
+        return bouquins;
     }
 
-    public void creerMateriel(Materiel materiel) throws SQLException, IOException, ClassNotFoundException {
+    public void creerLivre(Bouquin bouquin) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;
         connexionDB();
-        System.out.println("creerMateriel");
+        System.out.println("creerLivre");
         SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         System.out.println(format.format(date));
 
-        preparedStatement = conn.prepareStatement("INSERT INTO materiel(nom, date_achat) VALUES(?, ?);");
-        preparedStatement.setString(1, materiel.getNom());
-        preparedStatement.setDate(2, date);
+        preparedStatement = conn.prepareStatement("INSERT INTO livre(libelle, auteur, date) VALUES(?, ?, ?);");
+        preparedStatement.setString(1, bouquin.getNom());
+        preparedStatement.setString(2, bouquin.getAuteur());
+        preparedStatement.setDate(3, date);
 
         preparedStatement.executeUpdate();
-        System.out.println(materiel);
+        System.out.println(bouquin);
 
         conn.close();
     }
 
-    public void supprimerMateriel(int id_materiel) throws SQLException, IOException, ClassNotFoundException {
+    public void supprimerLivre(int id_livre) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;
         connexionDB();
 
-        System.out.println(id_materiel);
+        System.out.println(id_livre);
         // connexion = daoFactory.getConnection();
-        preparedStatement = conn.prepareStatement("DELETE FROM materiel where id_materiel=?;");
-        preparedStatement.setInt(1, id_materiel);
+        preparedStatement = conn.prepareStatement("DELETE FROM livre where id_livre=?;");
+        preparedStatement.setInt(1, id_livre);
         preparedStatement.executeUpdate();
         conn.close();
     }

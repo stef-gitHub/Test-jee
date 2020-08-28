@@ -31,7 +31,7 @@
   </servlet>
   <servlet>
     <servlet-name>LivreServlet</servlet-name>
-    <servlet-class>servlets.LivreServlet</servlet-class>
+    <servlet-class>servlets.BouquinServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>MaterielServlet</servlet-name>

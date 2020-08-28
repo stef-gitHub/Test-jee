@@ -8,6 +8,9 @@ public class Bouquin {
     private String auteur;
     private Date date;
 
+    public Bouquin() {
+    }
+
     public int getId_bouquin() {
         return id_bouquin;
     }

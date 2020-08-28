@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="beans.Materiel" %><%--
+<%@ page import="beans.Bouquin" %>
+<%--
   Created by IntelliJ IDEA.
   User: stef4
   Date: 26/08/2020
@@ -18,7 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="assets/javascript/bootstrap.min.js"></script>
 
-    <title>Gestion du matériel</title>
+    <title>Gestion des Livres</title>
 </head>
 <body style =" background-color: #E1E1E1;">
 <nav style="background-color : #373737" class="navbar navbar-expand-sm navbar-dark">
@@ -48,39 +49,43 @@
     </ul>
 </nav>
 <br>
-<h1 class="display-3" style="text-align: center" >Gestion du matériel</h1>
+<h1 class="display-3" style="text-align: center" >Gestion des Livres</h1>
 <hr>
 <div style ="background-color: white;margin-top: 50px; max-width: 80%" class="container">
     <div class="row">
         <div class="col-md-12">
             <br>
             <div class="float-right"> <!-- Button to Open the Modal -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createMateriel">
-                    Ajouter un matériel
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createLivre">
+                    Ajouter un livre
                 </button>
 
                 <!-- The Modal CREATE -->
-                <div class="modal fade" id="createMateriel">
+                <div class="modal fade" id="createLivre">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form action="materiel" method="post">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Création d'un matériel</h4>
+                                    <h4 class="modal-title">Ajoutez d'un livre</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label for="nomMateriel">Nom</label>
-                                        <input type="text" class="form-control" id="nomMateriel" name="nomMateriel" required>
+                                        <label for="nomLivre">Nom du livre</label>
+                                        <input type="text" class="form-control" id="nomLivre" name="nomLivre" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nomAuteurLivre">Nom de l'auteur</label>
+                                        <input type="text" class="form-control" id="nomAuteurLivre" name="nomAuteurLivre" required>
                                     </div>
                                 </div>
 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <input type="submit" class="btn btn-success" name="submit" value="Créer Matériel"/>
+                                    <input type="submit" class="btn btn-success" name="submit" value="Créer Livre"/>
                                 </div>
                             </form>
                         </div>
@@ -88,28 +93,30 @@
                     </div>
                 </div>
             </div>
-            <h2 style="text-align: center">Les Matériels</h2>
+            <h2 style="text-align: center">Les Livres</h2>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Nom</th>
+                    <th>Nom di livre</th>
+                    <th>Nom de l'auteur</th>
                     <th>Date</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                    List<Materiel> list = (ArrayList<Materiel>)request.getAttribute("materiels");
-                    for (Materiel materiel : list) {
+                    List<Bouquin> list = (ArrayList<Bouquin>)request.getAttribute("livres");
+                    for (Bouquin bouquin : list) {
                 %>
                 <tr>
-                    <td> <% out.println(materiel.getNom());%></td>
-                    <td> <% out.println(materiel.getDate());%></td>
+                    <td> <% out.println(bouquin.getNom());%></td>
+                    <td> <% out.println(bouquin.getAuteur());%></td>
+                    <td> <% out.println(bouquin.getDate());%></td>
                     <td>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerMateriel">Supprimer</button>
-<%--                        <form action="materiel" method="post">--%>
-<%--                            <input hidden type="text" name="id_materiel" value="<% out.print(materiel.getId_materiel());%>"/>--%>
-<%--                            <input type="submit" class="btn btn-danger" name="supprimerMateriel" value="Supprimer"/>--%>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerLivre">Supprimer</button>
+<%--                        <form action="livre" method="post">--%>
+<%--                            <input hidden type="text" name="id_livre" value="<% out.print(bouquin.getId_bouquin());%>"/>--%>
+<%--                            <input type="submit" class="btn btn-danger" name="supprimerLivre" value="Supprimer"/>--%>
 <%--                        </form>--%>
                     </td>
                 </tr>
@@ -122,19 +129,19 @@
     </div>
 
     <!-- The Modal DELETE -->
-    <div class="modal fade" id="supprimerMateriel">
+    <div class="modal fade" id="supprimerLivre">
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Supprimer un materiel</h4>
+                    <h4 class="modal-title">Supprimer un livre</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <p>Etes-vous sûr de vouloir supprimer ce materiel ? </p>
+                    <p>Etes-vous sûr de vouloir supprimer ce livre ? </p>
                 </div>
 
                 <!-- Modal footer -->
