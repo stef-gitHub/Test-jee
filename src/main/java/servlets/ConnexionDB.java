@@ -12,7 +12,7 @@ public class ConnexionDB {
     static Connection conn;
 
     public static void connexionTest() throws SQLException, ClassNotFoundException, IOException {
-        FileInputStream fis = new FileInputStream("C:/Users/stef4/IdeaProjects/jee-project/src/main/resources/config.properties");
+        FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
         p.load(fis);
         String dname = (String) p.get("Dname");

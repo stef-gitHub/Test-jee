@@ -128,15 +128,13 @@
                     for (Classe classe : list) {
                 %>
                 <tr>
-                    <td> <% out.println(classe.getNom());%></td>
-                    <td> <% out.println(classe.getAnnee());%></td>
-                    <td><% out.println(classe.getNiveau().getLibelle());%></td>
+                    <td> <% out.print(classe.getNom());%></td>
+                    <td> <% out.print(classe.getAnnee());%></td>
+                    <td><% out.print(classe.getNiveau().getLibelle());%></td>
                     <td>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#creerClasse">
-                            Créer une classe
-                        </button>
+                        <input data-toggle="modal" data-target="#modifierClasse" type="button" class="btn btn-success" onclick="modifier('<% out.print(classe.getId_classe());%>', '<% out.print(classe.getNom());%>', '<% out.print(classe.getAnnee());%>', '<% out.print(classe.getNiveau().getId_niveau());%>')" value="modifier"/>
                         <form action="classe" method="post">
-                            <input hidden type="text" name="idClasse" value="<% out.println(classe.getId_classe());%>"/>
+                            <input hidden type="text" name="idClasse" value="<% out.print(classe.getId_classe());%>"/>
                             <input type="submit" class="btn btn-danger" name="supprimerClasse" value="Supprimer"/>
                         </form>
 
@@ -145,10 +143,80 @@
                 <% } %>
                 </tbody>
             </table>
+
+            <div class="modal fade" id="modifierClasse">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="classe" method="post">
+
+                            <input hidden type="text" name="idClasse" value="" id="idclasseModifier"/>
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Création d'une classe</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <label for="modifierNomClasse">Nom</label>
+                                    <input type="text" class="form-control" id="modifierNomClasse" name="modifierNomClasse" value="" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="modifierAnneeClasse">Année</label>
+                                    <input type="number" min="1900" max="2099" step="1" value="" class="form-control" id="modifierAnneeClasse" name="modifierAnneeClasse" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Niveau</label>
+                                    <div>
+                                        <input type="radio" id="cpmodifier"
+                                               name="modifierNiveauClasse" value="1">
+                                        <label for="cpmodifier">CP</label>
+
+                                        <input type="radio" id="ce1modifier"
+                                               name="modifierNiveauClasse" value="2">
+                                        <label for="ce1modifier">CE1</label>
+
+                                        <input type="radio" id="ce2modifier"
+                                               name="modifierNiveauClasse" value="3">
+                                        <label for="ce2modifier">CE2</label>
+
+                                        <input type="radio" id="cm1modifier"
+                                               name="modifierNiveauClasse" value="4">
+                                        <label for="cm1modifier">CM1</label>
+
+                                        <input type="radio" id="cm2modifier"
+                                               name="modifierNiveauClasse" value="5">
+                                        <label for="cm2modifier">CM2</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-success" name="submit" value="Créer"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
         <br>
 
-    </div></div>
+    </div>
+</div>
 </body>
+<script>
+    function modifier(id_classe, nom_classe, annee_classe, id_niveau){
+        //alert(id_classe+" "+nom_classe+" "+annee_classe+" "+id_niveau);
+        $("#idclasseModifier").attr('value', id_classe);
+        $("#modifierNomClasse").attr('value', nom_classe);
+        $("#modifierAnneeClasse").attr('value', annee_classe);
+        //$("modifierNomClasse").val(id_niveau);
+
+    }
+</script>
 </html>
