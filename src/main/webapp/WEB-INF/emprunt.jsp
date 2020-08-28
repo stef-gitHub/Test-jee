@@ -1,4 +1,6 @@
-<%--
+<%@ page import="beans.Emprunt" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: stef4
   Date: 26/08/2020
@@ -79,46 +81,36 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
+                    <th>Professeur</th>
+                    <th>Livre</th>
+                    <th>Matériel</th>
+                    <th>Date début</th>
+                    <th>Date fin</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
+                <%
+                    List<Emprunt> listEmprunt = (ArrayList<Emprunt>)request.getAttribute("emprunts");
+                    for (Emprunt emprunt : listEmprunt) {
+                %>
                 <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
+                    <td> <% out.println(emprunt.getProfesseur().getNom());%>  <% out.println(emprunt.getProfesseur().getPrenom());%> </td>
+                    <td> <% out.println(emprunt.getBouquin().getNom());%></td>
+                    <td> <% out.println(emprunt.getMateriel().getNom());%></td>
+                    <td> <% out.println(emprunt.getDate_debut());%></td>
+                    <td> <% out.println(emprunt.getDate_fin());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateProfesseur">Modifier</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteProfesseur">Supprimer</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr>
+                <% } %>
                 </tbody>
             </table>
         </div>
         <br>
         <br>
-
     </div>
 </body>
 </html>
