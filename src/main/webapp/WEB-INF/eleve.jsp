@@ -40,6 +40,12 @@
         <li class="nav-item">
             <a class="nav-link" href="emprunt">Emprunts</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="materiel">Matériels</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="livre">Livres</a>
+        </li>
     </ul>
 </nav>
 <br>
@@ -116,10 +122,12 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
+                    <th class="hide">id</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Père</th>
                     <th>Mère</th>
+                    <th>Adresse</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -129,13 +137,15 @@
                     for (Eleve eleve : listEleves){
                 %>
                 <tr>
-
+                    <td><% out.println(eleve.getId_personne());%></td>
                     <td><% out.println(eleve.getNom());%></td>
                     <td><% out.println(eleve.getPrenom());%></td>
                     <td><% out.println(eleve.getPere());%></td>
                     <td><% out.println(eleve.getMere());%></td>
+                    <td><% out.println(eleve.getAdresse());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateStudent">Modifier</button>
+                        <input data-toggle="modal" data-target="#updateStudent" type="button" class="btn btn-success" onclick="update('<%=eleve.getId_personne()%>', '<%=eleve.getNom()%>', '<%=eleve.getPrenom()%>', '<%=eleve.getAdresse()%>', '<%=eleve.getCp()%>', '<%=eleve.getVille()%>', '<%=eleve.getPere()%>', '<%=eleve.getMere()%>')" value="Modifier"/>
+
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteStudent">Supprimer</button>
                     </td>
                 </tr>
@@ -145,8 +155,76 @@
         </div>
         <br>
         <br>
+        <!-- The Modal UPDATE student-->
+        <div class="modal fade" id="updateStudent">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="eleve" method="post">
+                        <input hidden type="text" name="idEleve" value="" id="idEleveUpdate"/>
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Modifier un élève</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
 
+                        <!-- Modal body -->
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="nomEleveUpdate">Nom</label>
+                                <input type="text" class="form-control" id="nomEleveUpdate" name="nomEleveUpdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenomEleveUpdate">Prénom</label>
+                                <input type="text" class="form-control" id="prenomEleveUpdate" name="prenomEleveUpdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="adresseEleveUpdate">Adresse</label>
+                                <input type="text" class="form-control" id="adresseEleveUpdate" name="adresseEleveUpdate">
+                            </div>
+
+                            <div class="form-group row" style="margin-left:1px">
+                                <div class="col-xs-2">
+                                    <label for="cpEleveUpdate">Code Postal</label>
+                                    <input type="text" class="form-control" id="cpEleveUpdate" name="cpEleveUpdate">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="villeEleveUpdate">Ville</label>
+                                <input type="text" class="form-control" id="villeEleveUpdate" name="villeEleveUpdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="pereEleveUpdate">Père</label>
+                                <input type="text" class="form-control" id="pereEleveUpdate" name="pereEleveUpdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="mereEleveUpdate">Mère</label>
+                                <input type="text" class="form-control" id="mereEleveUpdate" name="mereEleveUpdate">
+                            </div>
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success" name="submit" value="Modifier"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
+<script>
+    function update(id_eleve, nom, prenom, adresse, code_postal, ville, pere, mere){
+        $("#idEleveUpdate").attr('value', id_eleve);
+        $("#nomEleveUpdate").attr('value', nom);
+        $("#prenomEleveUpdate").attr('value', prenom);
+        $("#adresseEleveUpdate").attr('value', adresse);
+        $("#cpEleveUpdate").attr('value', code_postal);
+        $("#villeEleveUpdate").attr('value', ville);
+        $("#pereEleveUpdate").attr('value', pere);
+        $("#mereEleveUpdate").attr('value', mere);
+    }
+</script>
 </html>

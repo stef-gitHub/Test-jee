@@ -29,6 +29,14 @@
     <servlet-name>EmpruntServlet</servlet-name>
     <servlet-class>servlets.EmpruntServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>LivreServlet</servlet-name>
+    <servlet-class>servlets.LivreServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MaterielServlet</servlet-name>
+    <servlet-class>servlets.MaterielServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>AccueilServlet</servlet-name>
@@ -49,5 +57,13 @@
   <servlet-mapping>
     <servlet-name>EmpruntServlet</servlet-name>
     <url-pattern>/emprunt</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LivreServlet</servlet-name>
+    <url-pattern>/livre</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MaterielServlet</servlet-name>
+    <url-pattern>/materiel</url-pattern>
   </servlet-mapping>
 </web-app>
