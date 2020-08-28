@@ -25,7 +25,7 @@ public class ClasseDAO {
         Class.forName(dname);
         conn = DriverManager.getConnection(url, user, passwd);
 
-        System.out.println("Connexion réussie !");
+        //System.out.println("Connexion réussie !");
     }
 
     public void creerClasse(Classe classe) throws SQLException, IOException, ClassNotFoundException {
@@ -45,7 +45,17 @@ public class ClasseDAO {
         conn.close();
     }
 
-    public void modifierClasse(){
+    public void modifierClasse(Classe c) throws SQLException, IOException, ClassNotFoundException {
+        PreparedStatement preparedStatement = null;
+        connexionDB();
+        // connexion = daoFactory.getConnection();
+        preparedStatement = conn.prepareStatement("UPDATE classe SET nom=?, annee=?, id_niveau=? where id_classe=?;");
+        preparedStatement.setString(1, c.getNom());
+        preparedStatement.setInt(2, c.getAnnee());
+        preparedStatement.setInt(3, c.getNiveau().getId_niveau());
+        preparedStatement.setInt(4, c.getId_classe());
+        preparedStatement.executeUpdate();
+        conn.close();
     }
 
     public ArrayList<Classe> afficherClasse() throws SQLException, IOException, ClassNotFoundException {
@@ -113,4 +123,40 @@ public class ClasseDAO {
 
         return niveau;
     }
+
+    public Classe getClasseFromID(int id) throws SQLException, IOException, ClassNotFoundException {
+
+        connexionDB();
+
+        String query = "SELECT *, niveau.libelle FROM classe, niveau where classe.id_niveau = niveau.id_niveau";
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+        Classe classe = new Classe();
+
+        while (rs.next())
+        {
+            Niveau niveau = new Niveau();
+
+            int id_classe = rs.getInt("classe.id_classe");
+            String nom = rs.getString("classe.nom");
+            int annee = rs.getInt("classe.annee");
+            int id_niveau = rs.getInt("classe.id_niveau");
+            String libelle = rs.getString("niveau.libelle");
+
+            niveau.setId_niveau(id_niveau);
+            niveau.setLibelle(libelle);
+
+            System.out.println(nom);
+
+            classe.setNom(nom);
+            classe.setAnnee(annee);
+            classe.setNiveau(niveau);
+            classe.setId_classe(id_classe);
+        }
+        System.out.println(classe);
+        conn.close();
+
+        return classe;
+    }
+
 }

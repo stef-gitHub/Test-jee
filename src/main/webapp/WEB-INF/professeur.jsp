@@ -68,30 +68,30 @@
                             <div class="modal-body">
 
                                     <div class="form-group">
-                                        <label for="nomProfesseur">Nom</label>
+                                        <label for="nomProfesseurCreate">Nom</label>
                                         <input type="text" class="form-control" id="nomProfesseurCreate" name="nomProfesseurCreate" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="prenomProfesseur">Prénom</label>
+                                        <label for="prenomProfesseurCreate">Prénom</label>
                                         <input type="text" class="form-control" id="prenomProfesseurCreate" name="prenomProfesseurCreate" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="adresseProfesseur">Adresse</label>
+                                        <label for="adresseProfesseurCreate">Adresse</label>
                                         <input type="text" class="form-control" id="adresseProfesseurCreate" name="adresseProfesseurCreate" required>
                                     </div>
 
                                     <div class="form-group row" style="margin-left:1px">
                                         <div class="col-xs-2">
-                                        <label for="cpProfesseur">Code Postal</label>
+                                        <label for="cpProfesseurCreate">Code Postal</label>
                                         <input type="text" class="form-control" id="cpProfesseurCreate" name="cpProfesseurCreate" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="villeProfesseur">Ville</label>
+                                        <label for="villeProfesseurCreate">Ville</label>
                                         <input type="text" class="form-control" id="villeProfesseurCreate" name="villeProfesseurCreate" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="mailProfesseur">Adresse mail</label>
+                                        <label for="mailProfesseurCreate">Adresse mail</label>
                                         <input type="text" class="form-control" id="mailProfesseurCreate" name="mailProfesseurCreate" >
                                     </div>
 
@@ -128,12 +128,15 @@
                     <td> <% out.println(professeur.getPrenom());%></td>
                     <td> <% out.println(professeur.getAdresse_mail());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateProfesseur">Modifier</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteProfesseur">Supprimer</button>
+                        <input data-toggle="modal" data-target="#updateProfesseur" type="button" class="btn btn-success" onclick="modifier('<% out.print(professeur.getId_personne());%>', '<% out.print(professeur.getAdresse_mail());%>', '<% out.print(professeur.getAdresse());%>', '<% out.print(professeur.getCp());%>', '<% out.print(professeur.getVille());%>', '<% out.print(professeur.getNom());%>', '<% out.print(professeur.getPrenom());%>')" value="modifier"/>
+                        <form action="professeur" method="post">
+                            <input hidden type="text" name="idProf" value="<% out.print(professeur.getId_personne());%>"/>
+                            <input type="submit" class="btn btn-danger" name="supprimerProf" value="Supprimer"/>
+                        </form>
                     </td>
                 </tr>
-                <% } %>
                 </tbody>
+                <% } %>
             </table>
         </div>
         <br>
@@ -154,41 +157,41 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form>
+                    <form action="professeur" method="post">
+                        <input hidden type="text" value="" name="idProfModifier" id="idProfModifier"/>
+
                         <div class="form-group">
-                            <label for="nomProfesseur">Nom</label>
-                            <input type="text" class="form-control" id="nomProfesseurUpdate" required>
+                            <label for="nomProfesseurUpdate">Nom</label>
+                            <input type="text" class="form-control" id="nomProfesseurUpdate" name="nomProfesseurUpdate" required>
                         </div>
                         <div class="form-group">
-                            <label for="prenomProfesseur">Prénom</label>
-                            <input type="text" class="form-control" id="prenomProfesseurUpdate" required>
+                            <label for="prenomProfesseurUpdate">Prénom</label>
+                            <input type="text" class="form-control" id="prenomProfesseurUpdate" name="prenomProfesseurUpdate" required>
                         </div>
                         <div class="form-group">
-                            <label for="adresseProfesseur">Adresse</label>
-                            <input type="text" class="form-control" id="adresseProfesseurUpdate" required>
+                            <label for="adresseProfesseurUpdate">Adresse</label>
+                            <input type="text" class="form-control" id="adresseProfesseurUpdate" name="adresseProfesseurUpdate" required>
                         </div>
 
                         <div class="form-group row" style="margin-left:1px">
                             <div class="col-xs-2">
-                                <label for="cpProfesseur">Code Postal</label>
-                                <input type="text" class="form-control" id="cpProfesseurUpdate" required>
+                                <label for="cpProfesseurUpdate">Code Postal</label>
+                                <input type="text" class="form-control" id="cpProfesseurUpdate" name="cpProfesseurUpdate" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="villeProfesseur">Ville</label>
-                            <input type="text" class="form-control" id="villeProfesseurUpdate" required>
+                            <label for="villeProfesseurUpdate">Ville</label>
+                            <input type="text" class="form-control" id="villeProfesseurUpdate" name="villeProfesseurUpdate" required>
                         </div>
                         <div class="form-group">
-                            <label for="mailProfesseur">Adresse mail</label>
-                            <input type="text" class="form-control" id="mailProfesseurUpdate">
+                            <label for="mailProfesseurUpdate">Adresse mail</label>
+                            <input type="text" class="form-control" id="mailProfesseurUpdate" name="mailProfesseurUpdate">
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success" name="submit" value="Modifier"/>
                         </div>
                     </form>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Modifier</button>
                 </div>
             </div>
         </div>
@@ -218,5 +221,18 @@
             </div>
         </div>
     </div>
+</div>
 </body>
+<script>
+    function modifier(id, mail, adresse, cp, ville, nom, prenom){
+        $("#idProfModifier").attr('value', id);
+        $("#nomProfesseurUpdate").attr('value', nom);
+        $("#prenomProfesseurUpdate").attr('value', prenom);
+        $("#adresseProfesseurUpdate").attr('value', adresse);
+        $("#cpProfesseurUpdate").attr('value', cp);
+        $("#villeProfesseurUpdate").attr('value', ville);
+        $("#mailProfesseurUpdate").attr('value', mail);
+
+    }
+</script>
 </html>

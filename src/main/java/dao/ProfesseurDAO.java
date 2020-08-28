@@ -1,5 +1,7 @@
 package dao;
 
+import beans.Classe;
+import beans.Niveau;
 import beans.Personne;
 import beans.Professeur;
 
@@ -82,8 +84,21 @@ public class ProfesseurDAO {
 
 
 
-    public void modifierProfesseur(){
-
+    public static void modifierProfesseur(Professeur p) throws SQLException, IOException, ClassNotFoundException {
+        PreparedStatement preparedStatement = null;
+        connexionDB();
+        // connexion = daoFactory.getConnection();
+        preparedStatement = conn.prepareStatement("UPDATE professeur, personne SET personne.nom=?, personne.prenom=?, professeur.mail=?, personne.adresse=?, personne.code_postal=?, personne.ville=? where personne.id_personne=? AND professeur.id_personne=?;");
+        preparedStatement.setString(1, p.getNom());
+        preparedStatement.setString(2, p.getPrenom());
+        preparedStatement.setString(3, p.getAdresse_mail());
+        preparedStatement.setString(4, p.getAdresse());
+        preparedStatement.setInt(5, p.getCp());
+        preparedStatement.setString(6, p.getVille());
+        preparedStatement.setInt(7, p.getId_personne());
+        preparedStatement.setInt(8, p.getId_personne());
+        preparedStatement.executeUpdate();
+        conn.close();
     }
 
     public ArrayList<Professeur> afficherProfesseur() throws SQLException, IOException, ClassNotFoundException {
@@ -92,7 +107,7 @@ public class ProfesseurDAO {
         ArrayList<Professeur> professeurs = new ArrayList<>();
 
         try {
-            String query = "SELECT professeur.mail, personne.nom, personne.prenom  FROM professeur inner join personne ON professeur.id_personne = personne.id_personne";
+            String query = "SELECT * FROM professeur inner join personne ON professeur.id_personne = personne.id_personne";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
 
@@ -104,10 +119,16 @@ public class ProfesseurDAO {
                 String mail = rs.getString("professeur.mail");
                 String nom = rs.getString("personne.nom");
                 String prenom = rs.getString("personne.prenom");
+                int id = rs.getInt("professeur.id_personne");
 
                 prof.setNom(nom);
                 prof.setPrenom(prenom);
                 prof.setAdresse_mail(mail);
+                prof.setId_personne(id);
+                prof.setAdresse_mail(rs.getString("professeur.mail"));
+                prof.setAdresse(rs.getString("personne.adresse"));
+                prof.setCp(rs.getInt("personne.code_postal"));
+                prof.setVille(rs.getString("personne.ville"));
 
                 System.out.println(prof.getNom() + " " + prof.getPrenom() + " "+ prof.getAdresse_mail());
 
@@ -122,8 +143,43 @@ public class ProfesseurDAO {
         return professeurs;
     }
 
-    public void supprimerProfesseur(){
+    public static void suppProf(int id) throws SQLException, IOException, ClassNotFoundException {
+        PreparedStatement preparedStatement = null;
+        connexionDB();
+        //System.out.println(id);
+        // connexion = daoFactory.getConnection();
+        preparedStatement = conn.prepareStatement("DELETE FROM personne where id_personne=?;");
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
+        conn.close();
     }
+
+
+    public static Professeur getProfFromId(int id) throws SQLException, IOException, ClassNotFoundException {
+
+        connexionDB();
+        Professeur prof = new Professeur();
+
+        String query = "SELECT * FROM professeur, personne where personne.id_personne = professeur.id_personne and professeur.id_personne = "+id;
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next())
+        {
+            prof.setNom(rs.getString("personne.nom"));
+            prof.setPrenom(rs.getString("personne.prenom"));
+            prof.setId_personne(rs.getInt("personne.id_personne"));
+            prof.setAdresse_mail(rs.getString("professeur.mail"));
+            prof.setAdresse(rs.getString("personne.adresse"));
+            prof.setCp(rs.getInt("personne.code_postal"));
+            prof.setVille(rs.getString("personne.ville"));
+
+        }
+        conn.close();
+
+        return prof;
+    }
+
 }
 
 
