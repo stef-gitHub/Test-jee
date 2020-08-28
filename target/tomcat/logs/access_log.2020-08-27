@@ -26,3 +26,14 @@
 0:0:0:0:0:0:0:1 - - [27/Aug/2020:21:12:26 +0100] "GET /web/professeur HTTP/1.1" 200 172337 http-bio-8080-exec-5 72
 0:0:0:0:0:0:0:1 - - [27/Aug/2020:21:12:27 +0100] "GET /web/eleve HTTP/1.1" 200 165018 http-bio-8080-exec-5 100
 0:0:0:0:0:0:0:1 - - [27/Aug/2020:21:12:28 +0100] "GET /web/classe HTTP/1.1" 200 168530 http-bio-8080-exec-5 9
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:00:58 +0200] "GET /web/eleve HTTP/1.1" 200 172461 http-bio-8080-exec-1 2367
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:00:58 +0200] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-2 0
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:01:43 +0200] "GET /web/classe HTTP/1.1" 200 168508 http-bio-8080-exec-4 314
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:01:45 +0200] "GET /web/eleve HTTP/1.1" 200 172461 http-bio-8080-exec-5 14
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:01:47 +0200] "GET /web/professeur HTTP/1.1" 200 170567 http-bio-8080-exec-6 99
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:12:39 +0200] "GET /web/eleve HTTP/1.1" 200 172461 http-bio-8080-exec-8 30
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:12:40 +0200] "GET /web/classe HTTP/1.1" 200 168508 http-bio-8080-exec-9 75
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:12:42 +0200] "GET /web/eleve HTTP/1.1" 200 172461 http-bio-8080-exec-10 162
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:12:44 +0200] "GET /web/professeur HTTP/1.1" 200 170567 http-bio-8080-exec-10 12
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:15:18 +0200] "GET /web/professeur HTTP/1.1" 200 170603 http-bio-8080-exec-3 285
+0:0:0:0:0:0:0:1 - - [27/Aug/2020:23:15:18 +0200] "GET /web/assets/javascript/bootstrap.min.js HTTP/1.1" 200 60050 http-bio-8080-exec-3 9

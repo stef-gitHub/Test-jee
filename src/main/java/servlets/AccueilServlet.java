@@ -3,7 +3,12 @@ package servlets;
 import connexion.test;
 import beans.Personne;
 import beans.Classe;
+import dao.ClasseDAO;
+import dao.EleveDAO;
+import dao.ProfesseurDAO;
+
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +31,18 @@ public class AccueilServlet extends HttpServlet {
         request.setAttribute( "test", message );
         request.setAttribute( "personne", premierBean );
         /* Transmission de la paire d'objets request/response à notre JSP */
+
+        ProfesseurDAO professeurDAO = new ProfesseurDAO();
+        ClasseDAO classeDAO = new ClasseDAO();
+        try {
+            request.setAttribute("professeurs", professeurDAO.afficherProfesseur());
+            request.setAttribute("classes", classeDAO.afficherClasse());
+            request.setAttribute("eleves", EleveDAO.displayEleve());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         this.getServletContext().getRequestDispatcher( "/WEB-INF/accueil.jsp" ).forward( request, response );
     }
 }
