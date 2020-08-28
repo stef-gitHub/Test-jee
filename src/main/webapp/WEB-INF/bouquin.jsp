@@ -99,23 +99,25 @@
                 <tr>
                     <th>Nom di livre</th>
                     <th>Nom de l'auteur</th>
-                    <th>date</th>
+                    <th>Date</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                    List<Bouquin> list = (ArrayList<Bouquin>)request.getAttribute("bouquins");
+                    List<Bouquin> list = (ArrayList<Bouquin>)request.getAttribute("livres");
                     for (Bouquin bouquin : list) {
                 %>
                 <tr>
-                    <td> <% out.println(materiel.getNom());%></td>
-                    <td> <% out.println(materiel.getDate());%></td>
+                    <td> <% out.println(bouquin.getNom());%></td>
+                    <td> <% out.println(bouquin.getAuteur());%></td>
+                    <td> <% out.println(bouquin.getDate());%></td>
                     <td>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerLivre">Supprimer</button>
-                        <form action="livre" method="post">
-                            <input hidden type="text" name="id_livre" value="<% out.print(bouquin.getId_bouquin());%>"/>
-                            <input type="submit" class="btn btn-danger" name="supprimerLivre" value="Supprimer"/>
-                        </form>
+<%--                        <form action="livre" method="post">--%>
+<%--                            <input hidden type="text" name="id_livre" value="<% out.print(bouquin.getId_bouquin());%>"/>--%>
+<%--                            <input type="submit" class="btn btn-danger" name="supprimerLivre" value="Supprimer"/>--%>
+<%--                        </form>--%>
                     </td>
                 </tr>
                 <% } %>
