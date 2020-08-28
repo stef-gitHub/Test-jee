@@ -13,12 +13,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class EleveServlet extends HttpServlet {
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-
         try {
-
             request.setAttribute("eleves", EleveDAO.displayEleve());
 
         } catch (SQLException throwables) {
@@ -26,14 +23,8 @@ public class EleveServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
-
-
         this.getServletContext().getRequestDispatcher( "/WEB-INF/eleve.jsp" ).forward( request, response );
+    }
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

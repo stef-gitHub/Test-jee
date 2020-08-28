@@ -110,8 +110,8 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
                     <th>Email</th>
                     <th>Actions</th>
                 </tr>
@@ -132,7 +132,6 @@
                     </td>
                 </tr>
                 <% } %>
-
                 </tbody>
             </table>
         </div>
@@ -157,30 +156,30 @@
                     <form>
                         <div class="form-group">
                             <label for="nomProfesseur">Nom</label>
-                            <input type="text" class="form-control" id="nomProfesseur" required>
+                            <input type="text" class="form-control" id="nomProfesseurUpdate" required>
                         </div>
                         <div class="form-group">
                             <label for="prenomProfesseur">Prénom</label>
-                            <input type="text" class="form-control" id="prenomProfesseur" required>
+                            <input type="text" class="form-control" id="prenomProfesseurUpdate" required>
                         </div>
                         <div class="form-group">
                             <label for="adresseProfesseur">Adresse</label>
-                            <input type="text" class="form-control" id="adresseProfesseur" required>
+                            <input type="text" class="form-control" id="adresseProfesseurUpdate" required>
                         </div>
 
                         <div class="form-group row" style="margin-left:1px">
                             <div class="col-xs-2">
                                 <label for="cpProfesseur">Code Postal</label>
-                                <input type="text" class="form-control" id="cpProfesseur" required>
+                                <input type="text" class="form-control" id="cpProfesseurUpdate" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="villeProfesseur">Ville</label>
-                            <input type="text" class="form-control" id="villeProfesseur" required>
+                            <input type="text" class="form-control" id="villeProfesseurUpdate" required>
                         </div>
                         <div class="form-group">
                             <label for="mailProfesseur">Adresse mail</label>
-                            <input type="text" class="form-control" id="mailProfesseur">
+                            <input type="text" class="form-control" id="mailProfesseurUpdate">
                         </div>
                     </form>
                 </div>
@@ -212,8 +211,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Supprimer</button>
+                    <button type="button" class="btn btn-success mr-auto" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Supprimer</button>
                 </div>
             </div>
         </div>

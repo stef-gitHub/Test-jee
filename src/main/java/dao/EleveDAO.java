@@ -13,7 +13,9 @@ import java.util.Properties;
 public class EleveDAO {
 
     static Connection conn;
-
+    /**
+     * Connection à la BDD, /!\ vérifier le fichier config.properties /!\
+     * */
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
@@ -29,7 +31,9 @@ public class EleveDAO {
 
         return conn;
     }
-
+    /**
+     * Créer un élève
+     * */
     public static void addEleve(String nom, String prenom, String adresse, int cp, String ville, String nom_pere, String nom_mere) throws SQLException, ClassNotFoundException{
 
         // the mysql insert statement
@@ -51,7 +55,9 @@ public class EleveDAO {
 
         System.out.println(nom +" "+ nom + " a été ajouté ");
     }
-
+    /**
+     * Supprimer un élève
+     * */
     public static void deleteEleve(int id) throws SQLException, ClassNotFoundException{
         String query = "Delete FROM eleve where id_eleve = ? ";
 
@@ -64,10 +70,10 @@ public class EleveDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
-
+    /**
+     * Modifier un élève
+     * */
     public static void updateEleve(String nom, String prenom, String adresse, int cp, String ville, String nom_pere, String nom_mere, int id) throws SQLException, ClassNotFoundException{
         String query = "Update eleve set nom = ?, prenom = ?, adresse = ?, cp = ?, ville = ?, nom_pere = ?, nom_mere where id_eleve = ?";
 
@@ -85,9 +91,10 @@ public class EleveDAO {
 
         System.out.println("id : " + id + " mis à jour !");
 
-
     }
-
+    /**
+     * Afficher les élèves
+     * */
     public static ArrayList<Personne> displayEleve() throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
         ArrayList<Personne> listEleves = new ArrayList<>();

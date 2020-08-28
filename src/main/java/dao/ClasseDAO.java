@@ -13,6 +13,9 @@ public class ClasseDAO {
 
     static Connection conn;
 
+    /**
+     * Connection à la BDD, /!\ vérifier le fichier config.properties /!\
+     * */
     public static void connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
@@ -26,6 +29,10 @@ public class ClasseDAO {
 
         System.out.println("Connexion réussie !");
     }
+
+    /**
+     * Créer une classe
+     * */
     public void creerClasse(Classe classe) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;
@@ -44,7 +51,9 @@ public class ClasseDAO {
         }
         conn.close();
     }
-
+    /**
+     * Modifier une classe
+     * */
     public void modifierClasse(){
     }
 
@@ -88,7 +97,9 @@ public class ClasseDAO {
 
         return classes;
     }
-
+    /**
+     * Supprimer une classe
+     * */
     public void supprimerClasse(int id_classe) throws SQLException, IOException, ClassNotFoundException {
         PreparedStatement preparedStatement = null;
         connexionDB();

@@ -12,7 +12,9 @@ import java.util.Properties;
 public class ProfesseurDAO {
 
     static Connection conn;
-
+    /**
+     * Connection à la BDD, /!\ vérifier le fichier config.properties /!\
+     * */
     public static void connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
@@ -26,6 +28,10 @@ public class ProfesseurDAO {
 
         System.out.println("Connexion réussie !");
     }
+
+    /**
+     * Créer un professeur
+     * */
     public void creerProfesseur(Professeur professeur) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;
@@ -44,7 +50,9 @@ public class ProfesseurDAO {
         }
         conn.close();
     }
-
+    /**
+     * Modifier un professeur
+     * */
     public void modifierProfesseur(){
 
     }
@@ -84,7 +92,9 @@ public class ProfesseurDAO {
 
         return professeurs;
     }
-
+    /**
+     * Supprimer un professeur
+     * */
     public void supprimerProfesseur(){
     }
 }
