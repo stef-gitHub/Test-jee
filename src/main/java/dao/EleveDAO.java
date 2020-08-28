@@ -4,6 +4,7 @@ import beans.Eleve;
 import beans.Personne;
 import beans.Professeur;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -30,7 +31,7 @@ public class EleveDAO {
         return conn;
     }
 
-    public static void addEleve(String nom, String prenom, String adresse, int cp, String ville, String nom_pere, String nom_mere) throws SQLException, ClassNotFoundException{
+    /*public static void addEleve(String nom, String prenom, String adresse, int cp, String ville, String nom_pere, String nom_mere) throws SQLException, ClassNotFoundException{
 
         // the mysql insert statement
         String query = " insert into professeur (nom, prenom, adresse, cp, ville, nom_pere, nom_mere)"
@@ -50,6 +51,59 @@ public class EleveDAO {
         preparedStmt.execute();
 
         System.out.println(nom +" "+ nom + " a été ajouté ");
+    }*/
+
+    public static void addEleve(Eleve eleve) throws SQLException, ClassNotFoundException{
+
+        // the mysql insert statement
+        String query = " insert into personne (nom, prenom, adresse, code_postal, ville)"
+                + " values (?, ?, ?, ?, ?)";
+
+        // create the mysql insert preparedstatement
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        preparedStmt.setString (1, eleve.getNom());
+        preparedStmt.setString (2, eleve.getPrenom());
+        preparedStmt.setString (3, eleve.getAdresse());
+        preparedStmt.setInt (4, eleve.getCp());
+        preparedStmt.setString (5, eleve.getVille());
+        //preparedStmt.setString (6, nom_pere);
+        //preparedStmt.setString (7, nom_mere);
+
+        // execute the preparedstatement
+        preparedStmt.execute();
+
+
+        System.out.println(eleve.getNom() +" "+ eleve.getNom() + " a été ajouté ");
+
+        //Display last id inserted
+        String displayLastInserted = "SELECT * FROM personne WHERE id_personne = (SELECT MAX(id_personne) FROM personne)";
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(displayLastInserted);
+
+
+        while (rs.next())
+        {
+
+            Integer id_personne = rs.getInt("personne.id_personne");
+            eleve.setId_personne(id_personne);
+
+            // print the result
+            System.out.format("%s\n", id_personne);
+        }
+
+        System.out.println(eleve.getId_personne());
+
+        //Add eleve with last id inserted
+        String query1 = " insert into eleve (nom_pere, nom_mere, id_personne)"
+                + " values (?, ?, ?)";
+
+        PreparedStatement preparedStatement = conn.prepareStatement(query1);
+        preparedStatement.setString(1, eleve.getPere());
+        preparedStatement.setString(2, eleve.getMere());
+        preparedStatement.setInt(3, eleve.getId_personne());
+
+        preparedStatement.execute();
+        System.out.println(eleve.getMere());
     }
 
     public static void deleteEleve(int id) throws SQLException, ClassNotFoundException{
