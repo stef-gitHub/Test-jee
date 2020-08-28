@@ -24,22 +24,32 @@ public class ClasseServlet extends HttpServlet {
         this.getServletContext().getRequestDispatcher( "/WEB-INF/classe.jsp" ).forward( request, response );
     }
 
-    public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-
-        Classe classe = new Classe();
-        classe.setAnnee(Integer.parseInt(request.getParameter("annee")));
-        //classe.setId_niveau(Integer.parseInt(request.getParameter("niveau")));
-        classe.setNom(request.getParameter("nom"));
-
-        ClasseDAO classeDAO = new ClasseDAO();
+    public void doPost( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         try {
-            classeDAO.creerClasse(classe);
+        ClasseDAO classeDAO = new ClasseDAO();
+
+        if (request.getParameter("supprimerClasse") != null) {
+            System.out.println("supprimer !");
+            classeDAO.supprimerClasse(Integer.parseInt(request.getParameter("idClasse")));
+        } else if (request.getParameter("creerNomClasse") != null) {
+            System.out.println("creer !");
+            Classe c = new Classe();
+            c.setNom(request.getParameter("creerNomClasse"));
+            c.setAnnee(Integer.parseInt(request.getParameter("creerAnneeClasse")));
+            int idNiveau = Integer.parseInt(request.getParameter("creerNiveauClasse"));
+            c.setNiveau(classeDAO.getNiveauFromId(idNiveau));
+            classeDAO.creerClasse(c);
+        } else if (request.getParameter("modifier") != null) {
+            //classeDAO.modifierClasse();
+        } else {
+            // ???
+        }
+        response.sendRedirect("classe");
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/classe.jsp").forward(request, response);
     }
 }
