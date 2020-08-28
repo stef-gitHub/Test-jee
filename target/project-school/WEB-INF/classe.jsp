@@ -90,7 +90,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
                 <%
                     List<Classe> list = (ArrayList<Classe>)request.getAttribute("classes");
                     for (Classe classe : list) {

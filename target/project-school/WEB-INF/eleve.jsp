@@ -1,7 +1,7 @@
 <%@ page import="beans.Personne" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%--
+<%@ page import="beans.Eleve" %><%--
   Created by IntelliJ IDEA.
   User: stef4
   Date: 26/08/2020
@@ -21,6 +21,7 @@
     <title>Gestion des élèves</title>
 </head>
 <body style =" background-color: #EED4D6;">
+
 <nav style="background-color : #97252D" class="navbar navbar-expand-sm navbar-dark">
     <!-- Brand -->
     <a class="navbar-brand" href="accueil">Accueil</a>
@@ -49,31 +50,64 @@
         <div class="col-md-12">
             <br>
             <div class="float-right"> <!-- Button to Open the Modal -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createStudent">
                     Créer un élève
                 </button>
 
-                <!-- The Modal -->
-                <div class="modal fade" id="myModal">
+                <!-- The Modal CREATE student-->
+                <div class="modal fade" id="createStudent">
                     <div class="modal-dialog">
                         <div class="modal-content">
+                            <form action="eleve" method="post">
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">Modal Heading</h4>
+                                <h4 class="modal-title">Création d'un élève</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                Modal body..
+
+                                    <div class="form-group">
+                                        <label for="nomEleveCreate">Nom</label>
+                                        <input type="text" class="form-control" id="nomEleveCreate" required name="nomEleveCreate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="prenomEleveCreate">Prénom</label>
+                                        <input type="text" class="form-control" id="prenomEleveCreate" name="prenomEleveCreate" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="adresseEleveCreate">Adresse</label>
+                                        <input type="text" class="form-control" id="adresseEleveCreate" name="adresseEleveCreate" required>
+                                    </div>
+
+                                    <div class="form-group row" style="margin-left:1px">
+                                        <div class="col-xs-2">
+                                            <label for="cpEleveCreate">Code Postal</label>
+                                            <input type="text" class="form-control" id="cpEleveCreate" name="cpEleveCreate" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="villeEleveCreate">Ville</label>
+                                        <input type="text" class="form-control" id="villeEleveCreate" name="villeEleveCreate" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pereEleveCreate">Père</label>
+                                        <input type="text" class="form-control" id="pereEleveCreate" name="pereEleveCreate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mereEleveCreate">Mère</label>
+                                        <input type="text" class="form-control" id="mereEleveCreate" name="mereEleveCreate">
+                                    </div>
+
                             </div>
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Créer</button>
+                                <input type="submit" class="btn btn-success" name="submit" value="Créer"/>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -82,45 +116,30 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Père</th>
+                    <th>Mère</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                    List<Personne> list = (ArrayList<Personne>)request.getAttribute("eleves");
-
+                    List<Eleve> listEleves = (ArrayList<Eleve>)request.getAttribute("eleves");
+                    for (Eleve eleve : listEleves){
                 %>
-                <tr <c:forEach var="${list}" begin="1" end="10">
-                    >
-                    <td>${list.nom}</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr </c:forEach>>
                 <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
+
+                    <td><% out.println(eleve.getNom());%></td>
+                    <td><% out.println(eleve.getPrenom());%></td>
+                    <td><% out.println(eleve.getPere());%></td>
+                    <td><% out.println(eleve.getMere());%></td>
                     <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateStudent">Modifier</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteStudent">Supprimer</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-warning">Modifier</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </tr>
+                <% } %>
                 </tbody>
             </table>
         </div>
@@ -128,5 +147,6 @@
         <br>
 
     </div>
+</div>
 </body>
 </html>

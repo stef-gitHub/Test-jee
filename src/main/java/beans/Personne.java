@@ -6,6 +6,8 @@ public class Personne {
     private String nom;
     private String prenom;
     private String adresse;
+    private int cp;
+    private String ville;
 
     public int getId_personne() {
         return id_personne;
@@ -39,4 +41,19 @@ public class Personne {
         this.adresse = adresse;
     }
 
+    public int getCp() {
+        return cp;
+    }
+
+    public void setCp(int cp) {
+        this.cp = cp;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
 }
