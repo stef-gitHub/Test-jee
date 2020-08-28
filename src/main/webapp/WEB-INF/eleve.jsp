@@ -40,6 +40,12 @@
         <li class="nav-item">
             <a class="nav-link" href="emprunt">Emprunts</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="materiel">Matériels</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="livre">Livres</a>
+        </li>
     </ul>
 </nav>
 <br>
