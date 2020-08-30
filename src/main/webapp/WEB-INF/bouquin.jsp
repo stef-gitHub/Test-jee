@@ -64,7 +64,7 @@
                 <div class="modal fade" id="createLivre">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="materiel" method="post">
+                            <form action="livre" method="post">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <h4 class="modal-title">Ajoutez d'un livre</h4>
@@ -113,11 +113,34 @@
                     <td> <% out.println(bouquin.getAuteur());%></td>
                     <td> <% out.println(bouquin.getDate());%></td>
                     <td>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerLivre">Supprimer</button>
-<%--                        <form action="livre" method="post">--%>
-<%--                            <input hidden type="text" name="id_livre" value="<% out.print(bouquin.getId_bouquin());%>"/>--%>
-<%--                            <input type="submit" class="btn btn-danger" name="supprimerLivre" value="Supprimer"/>--%>
-<%--                        </form>--%>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerLivre<% out.println(bouquin.getId_bouquin());%>">Supprimer</button>
+                        <!-- The Modal DELETE -->
+                        <div class="modal fade" id="supprimerLivre<% out.print(bouquin.getId_bouquin());%>">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Supprimer un livre</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <p>Etes-vous sûr de vouloir supprimer ce livre : <span style="font-weight: bold"><% out.print(bouquin.getNom());%> </span>? </p>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success mr-auto" data-dismiss="modal">Annuler</button>
+                                        <form action="livre" method="post">
+                                            <input hidden type="text" name="id_livre" value="<% out.print(bouquin.getId_bouquin());%>"/>
+                                            <input type="submit" class="btn btn-danger" name="supprimerLivre" value="Supprimer"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <% } %>

@@ -1,6 +1,9 @@
 <%@ page import="beans.Emprunt" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="beans.Professeur" %>
+<%@ page import="beans.Bouquin" %>
+<%@ page import="beans.Materiel" %><%--
   Created by IntelliJ IDEA.
   User: stef4
   Date: 26/08/2020
@@ -73,39 +76,40 @@
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <select id="selectProfesseurs" name="creerProfesseur">
+                                        <select id="selectProfesseurs" name="selectProf">
                                             <%
-                                                List<Emprunt> listProfs = (ArrayList<Emprunt>)request.getAttribute("emprunts");
-                                                for (Emprunt emprunts : listProfs) {
+                                                List<Professeur> listProfs = (ArrayList<Professeur>)request.getAttribute("profs");
+                                                for (Professeur profs : listProfs) {
                                             %>
-                                            <option value="<% out.println(emprunts.getProfesseur().getId_professeur());%>"><% out.println(emprunts.getProfesseur().getNom());%></option>
+                                            <option value="<% out.println(profs.getId_personne());%>"><% out.println(profs.getNom());%></option>
                                             <% } %>
                                         </select>
                                     </div>
                                         <br>
                                     <div class="form-group">
-                                        <select id="selectLivre" name="creerLivre">
+                                        <select id="selectLivre" name="selectLivre">
                                             <%
-                                                List<Emprunt> listLivres = (ArrayList<Emprunt>)request.getAttribute("emprunts");
-                                                for (Emprunt emprunts : listLivres) {
+                                                List<Bouquin> listLivres = (ArrayList<Bouquin>)request.getAttribute("livres");
+                                                for (Bouquin livres : listLivres) {
                                             %>
-                                            <option value="<% out.println(emprunts.getBouquin().getId_bouquin());%>"><% out.println(emprunts.getBouquin().getNom());%></option>
+                                            <option value="<% out.println(livres.getId_bouquin());%>"><% out.println(livres.getNom());%></option>
+
                                             <% } %>
                                         </select>
                                     </div>
                                         <br>
                                         <div class="form-group">
-                                            <select id="selectMateriel" name="creerMateriel">
+                                            <select id="selectMateriel" name="selectMateriel">
                                                 <%
-                                                    List<Emprunt> listMateriel = (ArrayList<Emprunt>)request.getAttribute("emprunts");
-                                                    for (Emprunt emprunts : listMateriel) {
+                                                    List<Materiel> listMateriel = (ArrayList<Materiel>)request.getAttribute("materiels");
+                                                    for (Materiel materiels : listMateriel) {
                                                 %>
-                                                <option value="<% out.println(emprunts.getMateriel().getId_materiel());%>"><% out.println(emprunts.getMateriel().getNom());%></option>
+                                                <option value="<% out.println(materiels.getId_materiel());%>"><% out.println(materiels.getNom());%></option>
                                                 <% } %>
                                             </select>
                                         </div>
                                 <!-- Modal footer -->
-                                    <input type="submit" class="btn btn-danger" name="creerEmprunt" value="créer"/>
+                                    <input type="submit" class="btn btn-danger" name="submit" value="Créer"/>
                                 </div>
                             </form>
                         </div>

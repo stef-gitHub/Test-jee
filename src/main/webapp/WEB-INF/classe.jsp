@@ -125,7 +125,7 @@
                     <th>Nom</th>
                     <th>Année</th>
                     <th>Niveau</th>
-                    <th>Actions</th>
+                    <th><div style="text-align: center">Actions</div></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -138,12 +138,37 @@
                     <td> <% out.print(classe.getAnnee());%></td>
                     <td><% out.print(classe.getNiveau().getLibelle());%></td>
                     <td>
-                        <input data-toggle="modal" data-target="#modifierProf" type="button" class="btn btn-warning" onclick="modifier('<% out.print(classe.getId_classe());%>', '<% out.print(classe.getNom());%>', '<% out.print(classe.getAnnee());%>', '<% out.print(classe.getNiveau().getId_niveau());%>')" value="Modifier"/>
-                        <form class="float-right" action="classe" method="post">
-                            <input hidden type="text" name="idClasse" value="<% out.print(classe.getId_classe());%>"/>
-                            <input type="submit" class="btn btn-danger" name="supprimerClasse" value="Supprimer"/>
-                        </form>
+                        <div class="float-right">
+                        <input style="margin-right: 50px;" data-toggle="modal" data-target="#modifierProf" type="button" class="btn btn-warning" onclick="modifier('<% out.print(classe.getId_classe());%>', '<% out.print(classe.getNom());%>', '<% out.print(classe.getAnnee());%>', '<% out.print(classe.getNiveau().getId_niveau());%>')" value="Modifier"/>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerClasse<% out.print(classe.getId_classe());%>">Supprimer</button>
+                        <!-- The Modal Professor DELETE -->
+                        <div class="modal fade" id="supprimerClasse<% out.print(classe.getId_classe());%>">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
 
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Supprimer un prof</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <p>Etes-vous sûr de vouloir supprimer cette classe : <span style="font-weight: bold"><% out.print(classe.getNom());%>  </span>? </p>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success mr-auto" data-dismiss="modal">Annuler</button>
+                                        <form class="float-right" action="classe" method="post">
+                                            <input hidden type="text" name="idClasse" value="<% out.print(classe.getId_classe());%>"/>
+                                            <input type="submit" class="btn btn-danger" name="supprimerClasse" value="Supprimer"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                     </td>
                 </tr>
                 <% } %>

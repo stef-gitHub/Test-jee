@@ -59,7 +59,7 @@
                     Ajouter un matériel
                 </button>
 
-                <!-- The Modal CREATE -->
+                <!-- The Modal Book CREATE -->
                 <div class="modal fade" id="createMateriel">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -106,11 +106,35 @@
                     <td> <% out.println(materiel.getNom());%></td>
                     <td> <% out.println(materiel.getDate());%></td>
                     <td>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerMateriel">Supprimer</button>
-<%--                        <form action="materiel" method="post">--%>
-<%--                            <input hidden type="text" name="id_materiel" value="<% out.print(materiel.getId_materiel());%>"/>--%>
-<%--                            <input type="submit" class="btn btn-danger" name="supprimerMateriel" value="Supprimer"/>--%>
-<%--                        </form>--%>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerMateriel<% out.print(materiel.getId_materiel());%>">Supprimer</button>
+                        <!-- The Modal Book DELETE -->
+                        <div class="modal fade" id="supprimerMateriel<% out.print(materiel.getId_materiel());%>">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Supprimer un materiel</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <p>Etes-vous sûr de vouloir supprimer ce livre : <span style="font-weight: bold"><% out.print(materiel.getNom());%> </span>? </p>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success mr-auto" data-dismiss="modal">Annuler</button>
+                                        <form action="materiel" method="post">
+                                            <input hidden type="text" name="id_materiel" value="<% out.print(materiel.getId_materiel());%>"/>
+                                            <input type="submit" class="btn btn-danger" name="supprimerMateriel" value="Supprimer"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </td>
                 </tr>
                 <% } %>
@@ -121,29 +145,6 @@
         <br>
     </div>
 
-    <!-- The Modal DELETE -->
-    <div class="modal fade" id="supprimerMateriel">
-        <div class="modal-dialog">
-            <div class="modal-content">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Supprimer un materiel</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <p>Etes-vous sûr de vouloir supprimer ce materiel ? </p>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success mr-auto" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Supprimer</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

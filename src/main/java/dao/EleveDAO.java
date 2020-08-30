@@ -3,6 +3,8 @@ package dao;
 import beans.Eleve;
 import beans.Niveau;
 import beans.Personne;
+import beans.Professeur;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -12,7 +14,9 @@ import java.util.Properties;
 public class EleveDAO {
 
     static Connection conn;
-
+    /**
+     * Connexion à la BDD
+     * */
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
@@ -28,7 +32,9 @@ public class EleveDAO {
 
         return conn;
     }
-
+    /**
+     * Ajouter un élève
+     * */
 
     public static void addEleve(Eleve eleve) throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
@@ -81,10 +87,12 @@ public class EleveDAO {
         System.out.println(eleve.getMere());
         conn.close();
     }
-
+    /**
+     * Supprimer un élève
+     * */
     public static void deleteEleve(int id) throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
-        String query = "Delete FROM eleve where id_eleve = ? ";
+        String query = "Delete FROM personne where id_personne = ? ";
 
         try (PreparedStatement preparedStmt = conn.prepareStatement(query)) {
             preparedStmt.setInt(1, id);
@@ -99,9 +107,13 @@ public class EleveDAO {
         conn.close();
     }
 
+    /**
+     * Modifier un élève
+     */
     public static void updateEleve(Eleve eleve) throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
-        String query = "Update personne set nom = ?, prenom = ?, adresse = ?, cp = ?, ville = ? where id_personne = ?";
+        String query = "Update personne , eleve set personne.nom = ?, personne.prenom = ?, personne.adresse = ?," +
+                " personne.code_postal = ?, personne.ville = ? , eleve.nom_pere = ?, eleve.nom_mere = ? where personne.id_personne = ? and eleve.id_personne = ?";
 
         PreparedStatement preparedStmt = conn.prepareStatement(query);
 
@@ -110,42 +122,18 @@ public class EleveDAO {
         preparedStmt.setString(3, eleve.getAdresse());
         preparedStmt.setInt (4, eleve.getCp());
         preparedStmt.setString (5, eleve.getVille());
-        //preparedStmt.setString (6, eleve.getPere());
-        //preparedStmt.setString (7, eleve.getMere());
-        preparedStmt.setInt(6, eleve.getId_personne());
+        preparedStmt.setString (6, eleve.getPere());
+        preparedStmt.setString (7, eleve.getMere());
+        preparedStmt.setInt(8, eleve.getId_personne());
+        preparedStmt.setInt(9, eleve.getId_personne());
         preparedStmt.executeUpdate();
-
-        //Display last id inserted
-        String displayLastInserted = "SELECT * FROM personne WHERE id_personne = (SELECT MAX(id_personne) FROM personne)";
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(displayLastInserted);
-
-        while (rs.next())
-        {
-
-            Integer id_personne = rs.getInt("personne.id_personne");
-            eleve.setId_personne(id_personne);
-
-            // print the result
-            System.out.format("%s\n", id_personne);
-        }
-
-        System.out.println(eleve.getId_personne());
-
-        String query1 = "Update eleve set nom_pere = ?, nom_mere = ? where id_personne = ?";
-        PreparedStatement preparedStatement = conn.prepareStatement(query1);
-        preparedStatement.setString(1, eleve.getPere());
-        preparedStatement.setString(2, eleve.getMere());
-        preparedStatement.setInt(3, eleve.getId_personne());
-
-        preparedStatement.executeUpdate();
-
-        System.out.println("id : " + eleve.getNom() + " mis à jour !");
 
         conn.close();
 
     }
-
+    /**
+     * Affichage des élèves
+     * */
     public static ArrayList<Personne> displayEleve() throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
         ArrayList<Personne> listEleves = new ArrayList<>();
@@ -186,18 +174,29 @@ public class EleveDAO {
 
 
     }
+    /**
+     * récupération des infos personne pour les lier à élvève (héritage)
+     * */
+    public static Eleve getEleveFromId(int id) throws SQLException, IOException, ClassNotFoundException {
 
-    public Eleve getElevebyIdPersonne(int id) throws SQLException, IOException, ClassNotFoundException {
         connexionDB();
         Eleve eleve = new Eleve();
 
-        String query = "SELECT * FROM eleve where eleve.id_personne = "+id;
+        String query = "SELECT * FROM eleve, personne where personne.id_personne = eleve.id_personne and eleve.id_personne = "+id;
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
 
         while (rs.next())
         {
-            eleve.setId_personne(rs.getInt("eleve.id_personne"));
+            eleve.setNom(rs.getString("personne.nom"));
+            eleve.setPrenom(rs.getString("personne.prenom"));
+            eleve.setId_personne(rs.getInt("personne.id_personne"));
+            eleve.setAdresse(rs.getString("personne.adresse"));
+            eleve.setCp(rs.getInt("personne.code_postal"));
+            eleve.setVille(rs.getString("personne.ville"));
+            eleve.setPere(rs.getString("eleve.nom_pere"));
+            eleve.setMere(rs.getString("eleve.nom_mere"));
+
         }
         conn.close();
 

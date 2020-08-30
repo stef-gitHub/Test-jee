@@ -28,7 +28,7 @@ public class MaterielServlet extends HttpServlet {
             MaterielDAO materielDAO = new MaterielDAO();
 
             if (request.getParameter("supprimerMateriel") != null) {
-                System.out.println("supprimer Materiel!");
+
                 materielDAO.supprimerMateriel(Integer.parseInt(request.getParameter("id_materiel")));
             } else if (request.getParameter("nomMateriel") != null) {
                 System.out.println("Materiel creer !");

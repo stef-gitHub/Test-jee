@@ -1,9 +1,8 @@
 package servlets;
 
-import beans.Classe;
-import beans.Emprunt;
-import dao.ClasseDAO;
-import dao.EmpruntDAO;
+import beans.*;
+import dao.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,40 +17,47 @@ import java.util.Locale;
 public class EmpruntServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ProfesseurDAO professeurDAO = new ProfesseurDAO();
         try {
             request.setAttribute("emprunts", EmpruntDAO.displayEmprunt());
+            request.setAttribute("profs", professeurDAO.afficherProfesseur());
+            request.setAttribute("livres", BouquinDAO.displayLivre());
+            request.setAttribute("materiels", MaterielDAO.displayMateriel());
 
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
         this.getServletContext().getRequestDispatcher( "/WEB-INF/emprunt.jsp" ).forward( request, response );
     }
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws IOException {
-        try {
-             if (request.getParameter("creerEmprunt") != null) {
+        Bouquin b = new Bouquin();
+        Professeur p = new Professeur();
+        Materiel m = new Materiel();
+        /**
+         * try {
+             if (request.getParameter("selectLivre") != null) {
                 System.out.println("Emprunt créé !");
                 Emprunt emprunt = new Emprunt();
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.FRENCH);
 
-                int idProf = Integer.parseInt(request.getParameter("creerProfesseur"));
-                emprunt.setProfesseur(EmpruntDAO.getProfFromId(idProf));
+                int idProf = Integer.parseInt(request.getParameter("selectProf"));
+                p.setId_personne(idProf);
+                int idLivre = Integer.parseInt(request.getParameter("selectLivre"));
+                b.setId_bouquin(idLivre);
+                int idMateriel = Integer.parseInt(request.getParameter("selectMateriel"));
+                m.setId_materiel(idMateriel);
 
-                int idLivre = Integer.parseInt(request.getParameter("creerLivre"));
-                emprunt.setBouquin(EmpruntDAO.getBouquinFromId(idLivre));
-
-                int idMateriel = Integer.parseInt(request.getParameter("creerMateriel"));
-                emprunt.setMateriel(EmpruntDAO.getMateriel(idMateriel));
+                emprunt.setProfesseur(p);
+                emprunt.setBouquin(b);
+                emprunt.setMateriel(m);
 
                 EmpruntDAO.addEmprunt(emprunt);
-            }
+                System.out.println(emprunt);
+            }*/
             response.sendRedirect("emprunt");
 
-        } catch (SQLException throwables) {
+        /**} catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        }*/
     }
 }

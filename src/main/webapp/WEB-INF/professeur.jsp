@@ -120,7 +120,7 @@
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
-                    <th>Actions</th>
+                    <th><div style="text-align: center">Actions</div></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -134,15 +134,41 @@
                     <td> <% out.println(professeur.getPrenom());%></td>
                     <td> <% out.println(professeur.getAdresse_mail());%></td>
                     <td>
-                        <input data-toggle="modal" data-target="#updateProfesseur" type="button" class="btn btn-warning" onclick="Modifier('<% out.print(professeur.getId_personne());%>', '<% out.print(professeur.getAdresse_mail());%>', '<% out.print(professeur.getAdresse());%>', '<% out.print(professeur.getCp());%>', '<% out.print(professeur.getVille());%>', '<% out.print(professeur.getNom());%>', '<% out.print(professeur.getPrenom());%>')" value="Modifier"/>
-                        <form class="float-right" action="professeur" method="post">
-                            <input hidden type="text" name="idProf" value="<% out.print(professeur.getId_personne());%>"/>
-                            <input type="submit" class="btn btn-danger" name="supprimerProf" value="Supprimer"/>
-                        </form>
+                        <div class="float-right">
+                        <input style="margin-right: 50px;" data-toggle="modal" data-target="#updateProfesseur" type="button" class="btn btn-warning" onclick="Modifier('<% out.print(professeur.getId_personne());%>', '<% out.print(professeur.getAdresse_mail());%>', '<% out.print(professeur.getAdresse());%>', '<% out.print(professeur.getCp());%>', '<% out.print(professeur.getVille());%>', '<% out.print(professeur.getNom());%>', '<% out.print(professeur.getPrenom());%>')" value="Modifier"/>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerProf<% out.print(professeur.getId_personne());%>">Supprimer</button>
+                        <!-- The Modal Professor DELETE -->
+                        <div class="modal fade" id="supprimerProf<% out.print(professeur.getId_personne());%>">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Supprimer un prof</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <p>Etes-vous sûr de vouloir supprimer le professeur: <span style="font-weight: bold"><% out.print(professeur.getPrenom());%> <% out.print(professeur.getNom());%> </span>? </p>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success mr-auto" data-dismiss="modal">Annuler</button>
+                                        <form class="float-right" action="professeur" method="post">
+                                            <input hidden type="text" name="idProf" value="<% out.print(professeur.getId_personne());%>"/>
+                                            <input type="submit" class="btn btn-danger" name="supprimerProf" value="Supprimer"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                     </td>
                 </tr>
+                        <% } %>
                 </tbody>
-                <% } %>
             </table>
         </div>
         <br>

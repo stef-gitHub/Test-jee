@@ -15,6 +15,9 @@ public class ProfesseurDAO {
 
     static Connection conn;
 
+    /**
+     * Connexion à la BDD
+     * */
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
@@ -31,16 +34,19 @@ public class ProfesseurDAO {
         return conn;
     }
 
+    /**
+     * Ajouter un professeur
+     * */
     public static void addProfessor(Professeur professeur) throws SQLException, ClassNotFoundException, IOException {
 
         connexionDB();
 
         // the mysql insert statement
-        String query = " insert into personne (nom, prenom, adresse, code_postal, ville)"
+        String querySelect = " insert into personne (nom, prenom, adresse, code_postal, ville)"
                 + " values (?, ?, ?, ?, ?)";
 
         // create the mysql insert preparedstatement
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        PreparedStatement preparedStmt = conn.prepareStatement(querySelect);
         preparedStmt.setString (1, professeur.getNom());
         preparedStmt.setString (2, professeur.getPrenom());
         preparedStmt.setString (3, professeur.getAdresse());
@@ -70,10 +76,10 @@ public class ProfesseurDAO {
         System.out.println(professeur.getId_personne());
 
         //Add eleve with last id inserted
-        String query1 = " insert into professeur (mail, id_personne)"
+        String queryAdd = " insert into professeur (mail, id_personne)"
                 + " values (?, ?)";
 
-        PreparedStatement preparedStatement = conn.prepareStatement(query1);
+        PreparedStatement preparedStatement = conn.prepareStatement(queryAdd);
         preparedStatement.setString(1, professeur.getAdresse_mail());
         preparedStatement.setInt(2, professeur.getId_personne());
 
@@ -82,8 +88,9 @@ public class ProfesseurDAO {
         conn.close();
     }
 
-
-
+    /**
+     * modifier des professeur
+     * */
     public static void modifierProfesseur(Professeur p) throws SQLException, IOException, ClassNotFoundException {
         PreparedStatement preparedStatement = null;
         connexionDB();
@@ -100,7 +107,9 @@ public class ProfesseurDAO {
         preparedStatement.executeUpdate();
         conn.close();
     }
-
+    /**
+     * Affichage des professeurs
+     * */
     public ArrayList<Professeur> afficherProfesseur() throws SQLException, IOException, ClassNotFoundException {
 
         connexionDB();
@@ -146,15 +155,16 @@ public class ProfesseurDAO {
     public static void suppProf(int id) throws SQLException, IOException, ClassNotFoundException {
         PreparedStatement preparedStatement = null;
         connexionDB();
-        //System.out.println(id);
-        // connexion = daoFactory.getConnection();
+
         preparedStatement = conn.prepareStatement("DELETE FROM personne where id_personne=?;");
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         conn.close();
     }
 
-
+    /**
+     * récupération des infos personne pour les lier à professeur (héritage)
+     * */
     public static Professeur getProfFromId(int id) throws SQLException, IOException, ClassNotFoundException {
 
         connexionDB();

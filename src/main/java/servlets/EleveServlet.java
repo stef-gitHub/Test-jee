@@ -1,7 +1,9 @@
 package servlets;
 
 import beans.Eleve;
+import beans.Professeur;
 import dao.EleveDAO;
+import dao.ProfesseurDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,8 @@ import java.sql.SQLException;
 public class EleveServlet extends HttpServlet {
     EleveDAO eleveDAO = new EleveDAO();
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // Affichage des élèves
         try {
 
             request.setAttribute("eleves", EleveDAO.displayEleve());
@@ -30,74 +34,65 @@ public class EleveServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
+        try {
+            // Post de supression d'un élève
+            if (request.getParameter("deleteEleve") != null){
 
-        if (request.getParameter("nomEleveCreate") != null) {
+                System.out.println("Suppression d'un élève :");
+                EleveDAO.deleteEleve(Integer.valueOf(request.getParameter("idEleve")));
+            }
+            // Post de création éleve
+            else if (request.getParameter("nomEleveCreate") != null) {
 
-            //CREATE Student
-            String nom = request.getParameter("nomEleveCreate");
-            String prenom = request.getParameter("prenomEleveCreate");
-            String adresse = request.getParameter("adresseEleveCreate");
-            Integer cp = Integer.valueOf(request.getParameter("cpEleveCreate"));
-            String ville = request.getParameter("villeEleveCreate");
-            String pere = request.getParameter("pereEleveCreate");
-            String mere = request.getParameter("mereEleveCreate");
+                System.out.println("Création d'un élève :");
 
-            System.out.println("nom: " + nom);
-            System.out.println("prenom: " + prenom);
+                String nom = request.getParameter("nomEleveCreate");
+                String prenom = request.getParameter("prenomEleveCreate");
+                String adresse = request.getParameter("adresseEleveCreate");
+                // Permet d'éviter une erreur de Type dans le form
+                Integer cp = Integer.valueOf(request.getParameter("cpEleveCreate"));
+                String ville = request.getParameter("villeEleveCreate");
+                String pere = request.getParameter("pereEleveCreate");
+                String mere = request.getParameter("mereEleveCreate");
 
-            Eleve eleve = new Eleve();
-            eleve.setNom(nom);
-            eleve.setPrenom(prenom);
-            eleve.setAdresse(adresse);
-            eleve.setCp(cp);
-            eleve.setVille(ville);
-            eleve.setPere(pere);
-            eleve.setMere(mere);
+                System.out.println("nom: " + nom);
+                System.out.println("prenom: " + prenom);
 
-            try {
+                Eleve eleve = new Eleve();
+                eleve.setNom(nom);
+                eleve.setPrenom(prenom);
+                eleve.setAdresse(adresse);
+                eleve.setCp(cp);
+                eleve.setVille(ville);
+                eleve.setPere(pere);
+                eleve.setMere(mere);
+
                 EleveDAO.addEleve(eleve);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+
+            // Post de modification Eleve
+            }  else if (request.getParameter("idEleveUpdate") != null) {
+
+                System.out.println("Moficiation d'un élève :");
+                Eleve eleve = new Eleve();
+                eleve = EleveDAO.getEleveFromId(Integer.parseInt(request.getParameter("idEleveUpdate")));
+                eleve.setNom(request.getParameter("nomEleveUpdate"));
+                eleve.setPrenom(request.getParameter("prenomEleveUpdate"));
+                eleve.setAdresse(request.getParameter("adresseEleveUpdate"));
+                eleve.setCp(Integer.valueOf(request.getParameter("cpEleveUpdate")));
+                eleve.setVille(request.getParameter("villeEleveUpdate"));
+                eleve.setMere(request.getParameter("mereEleveUpdate"));
+                eleve.setPere(request.getParameter("pereEleveUpdate"));
+
+                EleveDAO.updateEleve(eleve);
+
+            // Autres
+            } else {
             }
 
-        } else if (request.getParameter("nomEleveUpdate") != null) {
+            response.sendRedirect("eleve");
 
-            System.out.println("modifier !");
-            Integer id = Integer.valueOf(request.getParameter("idEleveUpdate"));
-            String nom = request.getParameter("nomEleveUpdate");
-            String prenom = request.getParameter("prenomEleveUpdate");
-            String adresse = request.getParameter("adresseEleveUpdate");
-            Integer cp = Integer.valueOf(request.getParameter("cpEleveUpdate"));
-            String ville = request.getParameter("villeEleveUpdate");
-            String pere = request.getParameter("mereEleveUpdate");
-            String mere = request.getParameter("pereEleveUpdate");
-
-
-            try {
-                Eleve e = eleveDAO.getElevebyIdPersonne(id);
-                e.setNom(nom);
-                e.setPrenom(prenom);
-                e.setAdresse(adresse);
-                e.setCp(cp);
-                e.setVille(ville);
-                e.setPere(pere);
-                e.setMere(mere);
-
-                EleveDAO.updateEleve(e);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
-            }
-
-        } else {
-
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
         }
-
-
-
-        response.sendRedirect("eleve");
     }
 }

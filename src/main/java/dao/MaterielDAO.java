@@ -12,6 +12,9 @@ import java.util.Properties;
 public class MaterielDAO {
     static Connection conn;
 
+    /**
+     * Connexion à la BDD
+     * */
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
@@ -28,6 +31,9 @@ public class MaterielDAO {
         return conn;
     }
 
+    /**
+     * Afficher tout le matériel
+     * */
     public static ArrayList<Materiel> displayMateriel() throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
         ArrayList<Materiel> materiels = new ArrayList<>();
@@ -40,9 +46,11 @@ public class MaterielDAO {
         while (rs.next()) {
             Materiel materiel = new Materiel();
 
+            int id = rs.getInt("id_materiel");
             String nom = rs.getString("materiel.nom");
             Date date_achat = rs.getDate("materiel.date_achat");
 
+            materiel.setId_materiel(id);
             materiel.setNom(nom);
             materiel.setDate(date_achat);
 
@@ -54,7 +62,9 @@ public class MaterielDAO {
         conn.close();
         return materiels;
     }
-
+    /**
+     * Créer matériel
+     * */
     public void creerMateriel(Materiel materiel) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;
@@ -73,7 +83,9 @@ public class MaterielDAO {
 
         conn.close();
     }
-
+    /**
+     * Supprimer un matériel
+     * */
     public void supprimerMateriel(int id_materiel) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;

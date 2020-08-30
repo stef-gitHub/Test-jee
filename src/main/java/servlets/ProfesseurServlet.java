@@ -17,6 +17,7 @@ import java.sql.SQLException;
 public class ProfesseurServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        // Affichage des professeurs
         ProfesseurDAO professeurDAO = new ProfesseurDAO();
         try {
             request.setAttribute("professeurs", professeurDAO.afficherProfesseur());
@@ -32,14 +33,14 @@ public class ProfesseurServlet extends HttpServlet {
                           HttpServletResponse response) throws ServletException, IOException {
 
         try {
+            // Post de supression professeur
             if (request.getParameter("supprimerProf") != null) {
 
                 System.out.println("supprimer !");
-                System.out.println(request.getParameter("idProf"));
                 ProfesseurDAO.suppProf(Integer.valueOf(request.getParameter("idProf")));
 
+            // Post de création professeur
             } else if (request.getParameter("nomProfesseurCreate") != null) {
-
 
                 String nom = request.getParameter("nomProfesseurCreate");
                 String prenom = request.getParameter("prenomProfesseurCreate");
@@ -58,6 +59,7 @@ public class ProfesseurServlet extends HttpServlet {
 
                 ProfesseurDAO.addProfessor(professeur);
 
+            // Post de modification professeur
             } else if (request.getParameter("idProfModifier") != null) {
 
                 System.out.println("modifier !");
@@ -71,17 +73,15 @@ public class ProfesseurServlet extends HttpServlet {
                 prof.setVille(request.getParameter("villeProfesseurUpdate"));
 
                 ProfesseurDAO.modifierProfesseur(prof);
-
+            // Autres
             } else {
-
+            // ???
             }
 
             response.sendRedirect("professeur");
 
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
 
     }

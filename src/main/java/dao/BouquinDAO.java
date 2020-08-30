@@ -12,7 +12,9 @@ import java.util.Properties;
 
 public class BouquinDAO {
     static Connection conn;
-
+    /**
+     * Connexion à la BDD
+     * */
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
@@ -29,6 +31,9 @@ public class BouquinDAO {
         return conn;
     }
 
+    /**
+     * Afficher les livres
+     * */
     public static ArrayList<Bouquin> displayLivre() throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
         ArrayList<Bouquin> bouquins = new ArrayList<>();
@@ -41,10 +46,12 @@ public class BouquinDAO {
         while (rs.next()) {
             Bouquin bouquin = new Bouquin();
 
+            int id_livre = rs.getInt("livre.id_livre");
             String nom = rs.getString("livre.libelle");
             String auteur = rs.getString("livre.auteur");
             Date date = rs.getDate("livre.date");
 
+            bouquin.setId_bouquin(id_livre);
             bouquin.setNom(nom);
             bouquin.setAuteur(auteur);
             bouquin.setDate(date);
@@ -52,12 +59,15 @@ public class BouquinDAO {
             bouquins.add(bouquin);
 
             // print the result
-            System.out.format("%s, %s\n", nom, auteur, date);
+            System.out.format("%s,%s, %s, %s\n", id_livre, nom, auteur, date);
         }
         conn.close();
         return bouquins;
     }
 
+    /**
+     * Créer un livre
+     * */
     public void creerLivre(Bouquin bouquin) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;
@@ -78,6 +88,9 @@ public class BouquinDAO {
         conn.close();
     }
 
+    /**
+     * Supprimer un livre
+     * */
     public void supprimerLivre(int id_livre) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;

@@ -122,13 +122,12 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th class="hide">id</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Père</th>
                     <th>Mère</th>
                     <th>Adresse</th>
-                    <th>Actions</th>
+                    <th><div style="text-align: center">Actions</div></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -137,16 +136,43 @@
                     for (Eleve eleve : listEleves){
                 %>
                 <tr>
-                    <td><% out.println(eleve.getId_personne());%></td>
                     <td><% out.println(eleve.getNom());%></td>
                     <td><% out.println(eleve.getPrenom());%></td>
                     <td><% out.println(eleve.getPere());%></td>
                     <td><% out.println(eleve.getMere());%></td>
                     <td><% out.println(eleve.getAdresse());%></td>
                     <td>
-                        <input  data-toggle="modal" data-target="#updateStudent" type="button" class="btn btn-warning" onclick="update('<%=eleve.getId_personne()%>', '<%=eleve.getNom()%>', '<%=eleve.getPrenom()%>', '<%=eleve.getAdresse()%>', '<%=eleve.getCp()%>', '<%=eleve.getVille()%>', '<%=eleve.getPere()%>', '<%=eleve.getMere()%>')" value="Modifier"/>
+                        <div class="float-right">
+                        <input style="margin-right: 50px;" data-toggle="modal" data-target="#updateStudent" type="button" class="btn btn-warning" onclick="update('<%=eleve.getId_personne()%>', '<%=eleve.getNom()%>', '<%=eleve.getPrenom()%>', '<%=eleve.getAdresse()%>', '<%=eleve.getCp()%>', '<%=eleve.getVille()%>', '<%=eleve.getPere()%>', '<%=eleve.getMere()%>')" value="Modifier"/>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerEleve<% out.print(eleve.getId_personne());%>">Supprimer</button>
 
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteStudent">Supprimer</button>
+                        <div class="modal fade" id="supprimerEleve<% out.print(eleve.getId_personne());%>">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Supprimer un prof</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <p>Etes-vous sûr de vouloir supprimer l'élève: <span style="font-weight: bold"><% out.print(eleve.getPrenom());%> <% out.print(eleve.getNom());%> </span>? </p>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success mr-auto" data-dismiss="modal">Annuler</button>
+                                        <form class="float-right"  action="eleve" method="post">
+                                            <input hidden type="text" name="idEleve" value="<% out.print(eleve.getId_personne());%>"/>
+                                            <input type="submit" class="btn btn-danger" name="deleteEleve" value="Supprimer"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                     </td>
                 </tr>
                 <% } %>
@@ -159,8 +185,8 @@
         <div class="modal fade" id="updateStudent">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="eleve" method="post">
-                        <input hidden type="text" name="idEleve" value="" id="idEleveUpdate"/>
+
+
                         <!-- Modal Header -->
                         <div class="modal-header">
                             <h4 class="modal-title">Modifier un élève</h4>
@@ -169,6 +195,8 @@
 
                         <!-- Modal body -->
                         <div class="modal-body">
+                            <form action="eleve" method="post">
+                                <input hidden type="text"  name="idEleveUpdate" value="" id="idEleveUpdate"/>
 
                             <div class="form-group">
                                 <label for="nomEleveUpdate">Nom</label>

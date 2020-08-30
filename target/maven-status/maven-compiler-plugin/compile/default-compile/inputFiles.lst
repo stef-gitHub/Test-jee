@@ -7,6 +7,8 @@ C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\beans\Note.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\connexion\test.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\beans\Eleve.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\beans\Professeur.java
+C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\dao\BouquinDAO.java
+C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\servlets\BouquinServlet.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\beans\Cours.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\beans\Niveau.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\dao\EmpruntDAO.java
@@ -14,7 +16,6 @@ C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\dao\ClasseDAO.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\servlets\EleveServlet.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\servlets\MaterielServlet.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\beans\Administrateur.java
-C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\servlets\LivreServlet.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\dao\ProfesseurDAO.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\beans\Bouquin.java
 C:\Users\stef4\IdeaProjects\projet-jee\src\main\java\dao\MaterielDAO.java
