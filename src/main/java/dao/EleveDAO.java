@@ -15,7 +15,7 @@ public class EleveDAO {
 
     static Connection conn;
     /**
-     * Connexion à la BDD
+     * Connection à la BDD, /!\ vérifier le fichier config.properties /!\
      * */
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
@@ -35,7 +35,6 @@ public class EleveDAO {
     /**
      * Ajouter un élève
      * */
-
     public static void addEleve(Eleve eleve) throws SQLException, ClassNotFoundException, IOException {
         connexionDB();
         // the mysql insert statement
@@ -84,7 +83,7 @@ public class EleveDAO {
         preparedStatement.setInt(3, eleve.getId_personne());
 
         preparedStatement.execute();
-        System.out.println(eleve.getMere());
+
         conn.close();
     }
     /**
@@ -135,6 +134,7 @@ public class EleveDAO {
      * Affichage des élèves
      * */
     public static ArrayList<Personne> displayEleve() throws SQLException, ClassNotFoundException, IOException {
+
         connexionDB();
         ArrayList<Personne> listEleves = new ArrayList<>();
         String query = "SELECT personne.id_personne, personne.nom, personne.prenom, eleve.nom_pere, eleve.nom_mere, personne.adresse, personne.code_postal, personne.ville FROM personne inner join eleve on personne.id_personne = eleve.id_personne";
@@ -142,17 +142,16 @@ public class EleveDAO {
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
 
-
         while (rs.next())
         {
             Eleve eleve = new Eleve();
-            Integer id = rs.getInt("personne.id_personne");
+            int id = rs.getInt("personne.id_personne");
             String nom = rs.getString("personne.nom");
             String prenom = rs.getString("personne.prenom");
             String nom_pere = rs.getString("eleve.nom_pere");
             String nom_mere = rs.getString("eleve.nom_mere");
             String adresse = rs.getString("personne.adresse");
-            Integer cp = rs.getInt("personne.code_postal");
+            int cp = rs.getInt("personne.code_postal");
             String ville = rs.getString("personne.ville");
 
             eleve.setId_personne(id);
@@ -169,10 +168,10 @@ public class EleveDAO {
             // print the result
             System.out.format("%s, %s, %s, %s, %s\n", id, nom, prenom, nom_pere, nom_mere, adresse, cp, ville);
         }
+
         conn.close();
+
         return listEleves;
-
-
     }
     /**
      * récupération des infos personne pour les lier à élvève (héritage)
@@ -202,6 +201,4 @@ public class EleveDAO {
 
         return eleve;
     }
-
-
 }

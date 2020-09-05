@@ -1,6 +1,11 @@
 servlets\EmpruntServlet.class
+dao\EmpruntDAO.class
+servlets\AccueilServlet.class
+servlets\ClasseServlet.class
 servlets\EleveServlet.class
 servlets\ProfesseurServlet.class
+servlets\LoginServlet.class
 servlets\BouquinServlet.class
 dao\BouquinDAO.class
+dao\ProfesseurDAO.class
 dao\EleveDAO.class

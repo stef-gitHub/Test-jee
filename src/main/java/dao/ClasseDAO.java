@@ -2,8 +2,6 @@ package dao;
 
 import beans.Classe;
 import beans.Niveau;
-
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -14,6 +12,9 @@ public class ClasseDAO {
 
     static Connection conn;
 
+    /**
+     * Connection à la BDD, /!\ vérifier le fichier config.properties /!\
+     * */
     public static void connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
         Properties p = new Properties();
@@ -27,7 +28,9 @@ public class ClasseDAO {
 
         //System.out.println("Connexion réussie !");
     }
-
+    /**
+     * Créer une classe
+     * */
     public void creerClasse(Classe classe) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;
@@ -44,11 +47,13 @@ public class ClasseDAO {
 
         conn.close();
     }
-
+    /**
+     * Modifier une classe
+     * */
     public void modifierClasse(Classe c) throws SQLException, IOException, ClassNotFoundException {
+
         PreparedStatement preparedStatement = null;
         connexionDB();
-        // connexion = daoFactory.getConnection();
         preparedStatement = conn.prepareStatement("UPDATE classe SET nom=?, annee=?, id_niveau=? where id_classe=?;");
         preparedStatement.setString(1, c.getNom());
         preparedStatement.setInt(2, c.getAnnee());
@@ -58,6 +63,9 @@ public class ClasseDAO {
         conn.close();
     }
 
+    /**
+     * Afficher les classes
+     * */
     public ArrayList<Classe> afficherClasse() throws SQLException, IOException, ClassNotFoundException {
 
         connexionDB();
@@ -95,6 +103,9 @@ public class ClasseDAO {
         return classes;
     }
 
+    /**
+     * Supprimer une classe
+     * */
     public void supprimerClasse(int id_classe) throws SQLException, IOException, ClassNotFoundException {
         PreparedStatement preparedStatement = null;
         connexionDB();
@@ -106,6 +117,9 @@ public class ClasseDAO {
         conn.close();
     }
 
+    /**
+     * Selectionne un niveau par id
+     * */
     public Niveau getNiveauFromId(int id) throws SQLException, IOException, ClassNotFoundException {
         connexionDB();
         Niveau niveau = new Niveau();
@@ -124,7 +138,10 @@ public class ClasseDAO {
         return niveau;
     }
 
-    public Classe getClasseFromID(int id) throws SQLException, IOException, ClassNotFoundException {
+    /**
+     * Selectionne une classe
+     * */
+    public Classe getClasseFromID ()throws SQLException, IOException, ClassNotFoundException {
 
         connexionDB();
 
@@ -132,11 +149,10 @@ public class ClasseDAO {
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
         Classe classe = new Classe();
+        Niveau niveau = new Niveau();
 
         while (rs.next())
         {
-            Niveau niveau = new Niveau();
-
             int id_classe = rs.getInt("classe.id_classe");
             String nom = rs.getString("classe.nom");
             int annee = rs.getInt("classe.annee");
@@ -153,7 +169,7 @@ public class ClasseDAO {
             classe.setNiveau(niveau);
             classe.setId_classe(id_classe);
         }
-        System.out.println(classe);
+
         conn.close();
 
         return classe;

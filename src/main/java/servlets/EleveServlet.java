@@ -1,32 +1,23 @@
 package servlets;
 
 import beans.Eleve;
-import beans.Professeur;
 import dao.EleveDAO;
-import dao.ProfesseurDAO;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class EleveServlet extends HttpServlet {
-    EleveDAO eleveDAO = new EleveDAO();
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Affichage des élèves
         try {
-
             request.setAttribute("eleves", EleveDAO.displayEleve());
-
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/eleve.jsp" ).forward( request, response );
@@ -84,9 +75,6 @@ public class EleveServlet extends HttpServlet {
                 eleve.setPere(request.getParameter("pereEleveUpdate"));
 
                 EleveDAO.updateEleve(eleve);
-
-            // Autres
-            } else {
             }
 
             response.sendRedirect("eleve");

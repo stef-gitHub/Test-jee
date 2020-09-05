@@ -1,12 +1,7 @@
 package servlets;
 
-import beans.Classe;
-import beans.Eleve;
 import beans.Professeur;
-import dao.ClasseDAO;
-import dao.EleveDAO;
 import dao.ProfesseurDAO;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +16,8 @@ public class ProfesseurServlet extends HttpServlet {
         ProfesseurDAO professeurDAO = new ProfesseurDAO();
         try {
             request.setAttribute("professeurs", professeurDAO.afficherProfesseur());
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/professeur.jsp").forward(request, response);
     }
@@ -73,9 +66,6 @@ public class ProfesseurServlet extends HttpServlet {
                 prof.setVille(request.getParameter("villeProfesseurUpdate"));
 
                 ProfesseurDAO.modifierProfesseur(prof);
-            // Autres
-            } else {
-            // ???
             }
 
             response.sendRedirect("professeur");
@@ -83,7 +73,5 @@ public class ProfesseurServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
-
     }
-
 }

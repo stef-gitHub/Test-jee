@@ -1,10 +1,7 @@
 package dao;
 
-import beans.Classe;
-import beans.Niveau;
 import beans.Personne;
 import beans.Professeur;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -16,7 +13,7 @@ public class ProfesseurDAO {
     static Connection conn;
 
     /**
-     * Connexion à la BDD
+     * Connection à la BDD, /!\ vérifier le fichier config.properties /!\
      * */
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
@@ -65,8 +62,7 @@ public class ProfesseurDAO {
 
         while (rs.next())
         {
-
-            Integer id_personne = rs.getInt("personne.id_personne");
+            int id_personne = rs.getInt("personne.id_personne");
             professeur.setId_personne(id_personne);
 
             // print the result
@@ -129,11 +125,13 @@ public class ProfesseurDAO {
                 String nom = rs.getString("personne.nom");
                 String prenom = rs.getString("personne.prenom");
                 int id = rs.getInt("professeur.id_personne");
+                int idp = rs.getInt("professeur.id_professeur");
 
                 prof.setNom(nom);
                 prof.setPrenom(prenom);
                 prof.setAdresse_mail(mail);
                 prof.setId_personne(id);
+                prof.setId_professeur(idp);
                 prof.setAdresse_mail(rs.getString("professeur.mail"));
                 prof.setAdresse(rs.getString("personne.adresse"));
                 prof.setCp(rs.getInt("personne.code_postal"));

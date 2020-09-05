@@ -1,7 +1,6 @@
 package dao;
 
 import beans.Materiel;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -13,7 +12,7 @@ public class MaterielDAO {
     static Connection conn;
 
     /**
-     * Connexion à la BDD
+     * Connection à la BDD, /!\ vérifier le fichier config.properties /!\
      * */
     public static Connection connexionDB() throws SQLException, ClassNotFoundException, IOException {
         FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
@@ -60,10 +59,11 @@ public class MaterielDAO {
             System.out.format("%s, %s\n", nom, date_achat);
         }
         conn.close();
+
         return materiels;
     }
     /**
-     * Créer matériel
+     * Créer un matériel
      * */
     public void creerMateriel(Materiel materiel) throws SQLException, IOException, ClassNotFoundException {
 
@@ -83,6 +83,7 @@ public class MaterielDAO {
 
         conn.close();
     }
+
     /**
      * Supprimer un matériel
      * */
@@ -91,11 +92,10 @@ public class MaterielDAO {
         PreparedStatement preparedStatement = null;
         connexionDB();
 
-        System.out.println(id_materiel);
-        // connexion = daoFactory.getConnection();
         preparedStatement = conn.prepareStatement("DELETE FROM materiel where id_materiel=?;");
         preparedStatement.setInt(1, id_materiel);
         preparedStatement.executeUpdate();
+
         conn.close();
     }
 }
