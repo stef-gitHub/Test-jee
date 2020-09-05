@@ -107,8 +107,8 @@
                         for (Bouquin bouquin : list) {
                     %>
                     <tr>
-                        <td> <% out.println(bouquin.getNom());%></td>
-                        <td> <% out.println(bouquin.getAuteur());%></td>
+                        <td> <% out.println(bouquin.getNom().substring(0, 1).toUpperCase() + bouquin.getNom().substring(1));%></td>
+                        <td> <% out.println(bouquin.getAuteur().substring(0, 1).toUpperCase() + bouquin.getAuteur().substring(1));%></td>
                         <td> <% out.println(bouquin.getDate());%></td>
                         <td>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerLivre<% out.println(bouquin.getId_bouquin());%>">Supprimer</button>

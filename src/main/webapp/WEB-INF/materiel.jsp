@@ -100,7 +100,7 @@
                         for (Materiel materiel : list) {
                     %>
                     <tr>
-                        <td> <% out.println(materiel.getNom());%></td>
+                        <td> <% out.println(materiel.getNom().substring(0, 1).toUpperCase() + materiel.getNom().substring(1));%></td>
                         <td> <% out.println(materiel.getDate());%></td>
                         <td>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimerMateriel<% out.print(materiel.getId_materiel());%>">Supprimer</button>

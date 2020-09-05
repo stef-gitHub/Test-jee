@@ -145,9 +145,9 @@
                     for (Emprunt emprunt : listEmprunt) {
                 %>
                 <tr>
-                    <td> <% out.println(emprunt.getProfesseur().getNom());%>  <% out.println(emprunt.getProfesseur().getPrenom());%> </td>
-                    <td> <% out.println(emprunt.getBouquin().getNom());%></td>
-                    <td> <% out.println(emprunt.getMateriel().getNom());%></td>
+                    <td> <% out.println(emprunt.getProfesseur().getNom().toUpperCase());%>  <% out.println(emprunt.getProfesseur().getPrenom().substring(0, 1).toUpperCase() + emprunt.getProfesseur().getPrenom().substring(1));%> </td>
+                    <td> <% out.println(emprunt.getBouquin().getNom().substring(0, 1).toUpperCase() + emprunt.getBouquin().getNom().substring(1));%></td>
+                    <td> <% out.println(emprunt.getMateriel().getNom().substring(0, 1).toUpperCase() + emprunt.getMateriel().getNom().substring(1));%></td>
                     <td> <% out.println(emprunt.getDate_debut());%></td>
                     <td>
                         <div class="float-right">
