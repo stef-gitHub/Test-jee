@@ -86,8 +86,8 @@
                     %>
                     <tr>
 
-                        <td> <% out.println(professeur.getNom());%></td>
-                        <td> <% out.println(professeur.getPrenom());%></td>
+                        <td> <% out.println(professeur.getNom().toUpperCase());%></td>
+                        <td> <% out.println(professeur.getPrenom().substring(0, 1).toUpperCase() + professeur.getPrenom().substring(1));%></td>
                         <td> <% out.println(professeur.getAdresse_mail());%></td>
                     </tr>
                     <% } %>
@@ -112,9 +112,9 @@
                         for (Classe classe : listeClasse) {
                     %>
                     <tr>
-                        <td> <% out.println(classe.getNom());%></td>
+                        <td> <% out.println(classe.getNom().toUpperCase());%></td>
                         <td> <% out.println(classe.getAnnee());%></td>
-                        <td><% out.println(classe.getNiveau().getLibelle());%></td>
+                        <td><% out.println(classe.getNiveau().getLibelle().toUpperCase());%></td>
                     </tr>
                     <% } %>
                     </tbody>

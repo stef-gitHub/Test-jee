@@ -132,9 +132,9 @@
                         for (Classe classe : list) {
                     %>
                     <tr>
-                        <td> <% out.print(classe.getNom());%></td>
+                        <td> <% out.print(classe.getNom().toUpperCase());%></td>
                         <td> <% out.print(classe.getAnnee());%></td>
-                        <td> <% out.print(classe.getNiveau().getLibelle());%></td>
+                        <td> <% out.print(classe.getNiveau().getLibelle().toUpperCase());%></td>
                         <td>
                             <div class="float-right">
                             <input style="margin-right: 50px;" data-toggle="modal" data-target="#modifierProf" type="button" class="btn btn-warning" onclick="modifier('<% out.print(classe.getId_classe());%>', '<% out.print(classe.getNom());%>', '<% out.print(classe.getAnnee());%>', '<% out.print(classe.getNiveau().getId_niveau());%>')" value="Modifier"/>
