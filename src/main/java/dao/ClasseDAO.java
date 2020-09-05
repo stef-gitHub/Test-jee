@@ -71,7 +71,7 @@ public class ClasseDAO {
         connexionDB();
         ArrayList<Classe> classes = new ArrayList<>();
 
-        String query = "SELECT *, niveau.libelle FROM classe, niveau where classe.id_niveau = niveau.id_niveau";
+        String query = "SELECT *, niveau.libelle, niveau.id_niveau FROM classe, niveau where classe.id_niveau = niveau.id_niveau ORDER BY niveau.id_niveau";
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
 

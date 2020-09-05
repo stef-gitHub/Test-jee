@@ -133,8 +133,8 @@
                         for (Eleve eleve : listEleves){
                     %>
                     <tr>
-                        <td><% out.println(eleve.getNom());%></td>
-                        <td><% out.println(eleve.getPrenom());%></td>
+                        <td><% out.println(eleve.getNom().toUpperCase());%></td>
+                        <td><% out.println(eleve.getPrenom().substring(0, 1).toUpperCase() + eleve.getPrenom().substring(1));%></td>
                         <td><% out.println(eleve.getPere());%></td>
                         <td><% out.println(eleve.getMere());%></td>
                         <td><% out.println(eleve.getAdresse());%></td>

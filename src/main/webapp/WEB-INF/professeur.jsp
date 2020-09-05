@@ -127,8 +127,8 @@
                         for (Professeur professeur : list) {
                     %>
                     <tr>
-                        <td> <% out.println(professeur.getNom());%></td>
-                        <td> <% out.println(professeur.getPrenom());%></td>
+                        <td> <% out.println(professeur.getNom().toUpperCase());%></td>
+                        <td> <% out.println(professeur.getPrenom().substring(0, 1).toUpperCase() + professeur.getPrenom().substring(1));%></td>
                         <td> <% out.println(professeur.getAdresse_mail());%></td>
                         <td>
                             <div class="float-right">
